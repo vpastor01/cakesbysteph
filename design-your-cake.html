@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Your Cake | Cakes by Steph Leesburg VA</title>
+  <meta name="description" content="Not sure what you want? Use the Cakes by Steph cake designer to choose your occasion, size, flavor, filling, and style, then send it straight to Steph.">
+  <link rel="canonical" href="https://www.cakesbystephva.com/design-your-cake">
+  <meta property="og:title" content="Design Your Cake | Cakes by Steph">
+  <meta property="og:description" content="Walk through your perfect cake step by step and send your vision to Steph.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.cakesbystephva.com/design-your-cake">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .wizard { max-width: 760px; margin: 0 auto; padding: 50px 40px 90px; }
+    .progress-wrap { margin-bottom: 40px; }
+    .progress-meta { display: flex; justify-content: space-between; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+    .progress-track { height: 3px; background: var(--blush); border-radius: 2px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--rose); width: 14%; transition: width 0.35s ease; }
+
+    .step { display: none; }
+    .step.active { display: block; animation: fade 0.35s ease; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+    .step h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--dark); font-weight: normal; margin-bottom: 8px; }
+    .step .sub { color: var(--muted); margin-bottom: 28px; }
+
+    .options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .options.two { grid-template-columns: repeat(2, 1fr); }
+    .option { position: relative; }
+    .option input { position: absolute; opacity: 0; pointer-events: none; }
+    .option label {
+      display: block; cursor: pointer; padding: 22px 18px; text-align: center;
+      background: white; border: 1px solid var(--blush); border-radius: 3px;
+      color: var(--dark); font-size: 1rem; transition: all 0.2s;
+    }
+    .option label:hover { border-color: var(--rose); }
+    .option input:checked + label {
+      border-color: var(--rose); background: var(--blush);
+      box-shadow: inset 0 0 0 1px var(--rose);
+    }
+
+    .field-block { margin-top: 8px; }
+    .field-block label { display:block; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .field-block input, .field-block textarea {
+      width: 100%; padding: 14px 16px; border: 1px solid var(--blush); border-radius: 2px;
+      font-family: 'Georgia', serif; font-size: 1rem; background: white; color: var(--text); margin-bottom: 18px;
+    }
+    .field-block input:focus, .field-block textarea:focus { outline: none; border-color: var(--rose); }
+
+    .summary { background: var(--cream); border: 1px solid var(--blush); border-radius: 3px; padding: 24px 28px; margin: 24px 0; }
+    .summary h3 { font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rose); font-weight: normal; margin-bottom: 16px; }
+    .summary-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--blush); font-size: 0.98rem; }
+    .summary-row:last-child { border-bottom: none; }
+    .summary-row span:first-child { color: var(--muted); }
+    .summary-row span:last-child { color: var(--dark); text-align: right; }
+
+    .step-nav { display: flex; justify-content: space-between; margin-top: 34px; gap: 12px; }
+    .nav-back { visibility: hidden; }
+    .err { color: var(--rose); font-size: 0.9rem; margin-top: 12px; min-height: 1.2em; }
+
+    @media (max-width: 768px) {
+      .wizard { padding: 40px 22px 70px; }
+      .options { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">Cakes by <span>Steph</span></a>
+    <ul class="nav-links">
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/design-your-cake">Design Your Cake</a></li>
+      <li><a href="/portfolio">Portfolio</a></li>
+      <li><a href="/blog">Journal</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+    <a href="/order" class="nav-cta">Reserve a Tasting</a>
+  </nav>
+
+  <section class="page-hero">
+    <p class="eyebrow">Guided Cake Designer</p>
+    <h1>Design Your <em>Cake</em></h1>
+    <p>Answer a few questions and Steph will receive your full vision. It takes under two minutes, and there is a "help me choose" option at every step.</p>
+  </section>
+
+  <div class="wizard">
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span id="stepLabel">Step 1 of 7</span>
+        <span id="stepName">Occasion</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+
+    <form name="cake-designer" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you" id="cakeForm">
+      <input type="hidden" name="form-name" value="cake-designer">
+      <p hidden><label>Skip this field: <input name="bot-field"></label></p>
+
+      <!-- STEP 1: OCCASION -->
+      <div class="step active" data-name="Occasion" data-require="occasion">
+        <h2>What are we celebrating?</h2>
+        <p class="sub">Pick the occasion closest to yours.</p>
+        <div class="options">
+          <div class="option"><input type="radio" id="o1" name="occasion" value="Wedding"><label for="o1">Wedding</label></div>
+          <div class="option"><input type="radio" id="o2" name="occasion" value="Quinceañera"><label for="o2">Quinceañera</label></div>
+          <div class="option"><input type="radio" id="o3" name="occasion" value="Birthday"><label for="o3">Birthday</label></div>
+          <div class="option"><input type="radio" id="o4" name="occasion" value="Baby or Baptism"><label for="o4">Baby or Baptism</label></div>
+          <div class="option"><input type="radio" id="o5" name="occasion" value="Corporate or Event"><label for="o5">Corporate</label></div>
+          <div class="option"><input type="radio" id="o6" name="occasion" value="Peruvian Pastries"><label for="o6">Peruvian Pastries</label></div>
+          <div class="option"><input type="radio" id="o7" name="occasion" value="Something else"><label for="o7">Something Else</label></div>
+        </div>
+      </div>
+
+      <!-- STEP 2: SIZE -->
+      <div class="step" data-name="Size" data-require="size">
+        <h2>How many guests?</h2>
+        <p class="sub">A rough number is fine. It helps Steph plan the tiers.</p>
+        <div class="options">
+          <div class="option"><input type="radio" id="s1" name="size" value="Up to 20 (petite)"><label for="s1">Up to 20</label></div>
+          <div class="option"><input type="radio" id="s2" name="size" value="20 to 50"><label for="s2">20 to 50</label></div>
+          <div class="option"><input type="radio" id="s3" name="size" value="50 to 100"><label for="s3">50 to 100</label></div>
+          <div class="option"><input type="radio" id="s4" name="size" value="100 or more (grand)"><label for="s4">100+</label></div>
+          <div class="option"><input type="radio" id="s5" name="size" value="Not sure yet"><label for="s5">Not Sure</label></div>
+        </div>
+      </div>
+
+      <!-- STEP 3: FLAVOR -->
+      <div class="step" data-name="Flavor" data-require="flavor">
+        <h2>Choose a cake flavor.</h2>
+        <p class="sub">You can mix flavors across tiers at your tasting. Start with a favorite.</p>
+        <div class="options">
+          <div class="option"><input type="radio" id="f1" name="flavor" value="Vanilla Bean"><label for="f1">Vanilla Bean</label></div>
+          <div class="option"><input type="radio" id="f2" name="flavor" value="Dark Chocolate"><label for="f2">Dark Chocolate</label></div>
+          <div class="option"><input type="radio" id="f3" name="flavor" value="Lemon"><label for="f3">Lemon</label></div>
+          <div class="option"><input type="radio" id="f4" name="flavor" value="Red Velvet"><label for="f4">Red Velvet</label></div>
+          <div class="option"><input type="radio" id="f5" name="flavor" value="Almond"><label for="f5">Almond</label></div>
+          <div class="option"><input type="radio" id="f6" name="flavor" value="Tres Leches"><label for="f6">Tres Leches</label></div>
+          <div class="option"><input type="radio" id="f7" name="flavor" value="Help me choose"><label for="f7">Help Me Choose</label></div>
+        </div>
+      </div>
+
+      <!-- STEP 4: FILLING -->
+      <div class="step" data-name="Filling" data-require="filling">
+        <h2>Pick a filling.</h2>
+        <p class="sub">The layer between the layers. This is where cakes get memorable.</p>
+        <div class="options">
+          <div class="option"><input type="radio" id="i1" name="filling" value="Raspberry"><label for="i1">Raspberry</label></div>
+          <div class="option"><input type="radio" id="i2" name="filling" value="Salted Caramel"><label for="i2">Salted Caramel</label></div>
+          <div class="option"><input type="radio" id="i3" name="filling" value="Manjar Blanco"><label for="i3">Manjar Blanco</label></div>
+          <div class="option"><input type="radio" id="i4" name="filling" value="Vanilla Buttercream"><label for="i4">Vanilla Buttercream</label></div>
+          <div class="option"><input type="radio" id="i5" name="filling" value="Fresh Fruit"><label for="i5">Fresh Fruit</label></div>
+          <div class="option"><input type="radio" id="i6" name="filling" value="Chocolate Ganache"><label for="i6">Chocolate Ganache</label></div>
+          <div class="option"><input type="radio" id="i7" name="filling" value="Help me choose"><label for="i7">Help Me Choose</label></div>
+        </div>
+      </div>
+
+      <!-- STEP 5: STYLE -->
+      <div class="step" data-name="Style" data-require="style">
+        <h2>What is the look?</h2>
+        <p class="sub">The overall vibe. Steph will refine the details with you.</p>
+        <div class="options">
+          <div class="option"><input type="radio" id="t1" name="style" value="Floral"><label for="t1">Floral</label></div>
+          <div class="option"><input type="radio" id="t2" name="style" value="Minimalist"><label for="t2">Minimalist</label></div>
+          <div class="option"><input type="radio" id="t3" name="style" value="Sculptural"><label for="t3">Sculptural</label></div>
+          <div class="option"><input type="radio" id="t4" name="style" value="Opulent"><label for="t4">Opulent</label></div>
+          <div class="option"><input type="radio" id="t5" name="style" value="Themed"><label for="t5">Themed</label></div>
+          <div class="option"><input type="radio" id="t6" name="style" value="Let Steph design it"><label for="t6">Let Steph Design</label></div>
+        </div>
+      </div>
+
+      <!-- STEP 6: DATE -->
+      <div class="step" data-name="Date">
+        <h2>When is the event?</h2>
+        <p class="sub">Weekends book 4 to 6 weeks out, so earlier is better. Skip it if you are unsure.</p>
+        <div class="field-block">
+          <label for="event_date">Event Date</label>
+          <input type="date" id="event_date" name="event_date">
+          <label for="notes">Anything else Steph should know?</label>
+          <textarea id="notes" name="notes" rows="4" placeholder="Colors, inspiration, dietary needs, a photo you love."></textarea>
+        </div>
+      </div>
+
+      <!-- STEP 7: DETAILS + SUMMARY -->
+      <div class="step" data-name="Your Details">
+        <h2>Where should Steph reach you?</h2>
+        <p class="sub">Review your cake below, then send it. Steph replies within 24 hours.</p>
+        <div class="field-block">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" required>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div class="summary" id="summary">
+          <h3>Your Cake Vision</h3>
+          <div id="summaryRows"></div>
+        </div>
+      </div>
+
+      <div class="err" id="err"></div>
+      <div class="step-nav">
+        <button type="button" class="btn-secondary nav-back" id="backBtn">Back</button>
+        <button type="button" class="btn-primary" id="nextBtn">Continue</button>
+        <button type="submit" class="btn-primary" id="submitBtn" style="display:none;">Send to Steph</button>
+      </div>
+    </form>
+  </div>
+
+  <footer>
+    <div class="footer-brand">
+      <h3>Cakes by Steph</h3>
+      <p>Bespoke cake atelier serving Leesburg, Ashburn, Sterling, and all of Northern Virginia. Every creation made from scratch by Stephanie.</p>
+      <br>
+      <p>📞 <a href="tel:+12404715637" style="color: var(--rose); text-decoration:none;">(240) 471-5637</a></p>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <ul>
+        <li><a href="/wedding-cakes">Wedding Cakes</a></li>
+        <li><a href="/quinceanera-cakes">Quinceañera Cakes</a></li>
+        <li><a href="/birthday-cakes">Birthday Cakes</a></li>
+        <li><a href="/peruvian-pastries">Peruvian Pastries</a></li>
+        <li><a href="/baby-baptism-cakes">Baby & Baptism</a></li>
+        <li><a href="/corporate-cakes">Corporate & Events</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/design-your-cake">Design Your Cake</a></li>
+        <li><a href="/order">Reserve a Tasting</a></li>
+        <li><a href="/portfolio">Portfolio</a></li>
+        <li><a href="/about">About Steph</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="https://www.instagram.com/_cakes_bysteph_llc" target="_blank">Instagram</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2026 Cakes by Steph LLC · Leesburg, VA · All rights reserved.</p>
+    <p>Serving Leesburg · Ashburn · Sterling · Herndon · Reston · Fairfax · Northern Virginia</p>
+  </div>
+
+  <script>
+    (function () {
+      var steps = Array.prototype.slice.call(document.querySelectorAll('.step'));
+      var total = steps.length;
+      var current = 0;
+      var fill = document.getElementById('progressFill');
+      var stepLabel = document.getElementById('stepLabel');
+      var stepName = document.getElementById('stepName');
+      var backBtn = document.getElementById('backBtn');
+      var nextBtn = document.getElementById('nextBtn');
+      var submitBtn = document.getElementById('submitBtn');
+      var err = document.getElementById('err');
+
+      function val(name) {
+        var el = document.querySelector('input[name="' + name + '"]:checked');
+        return el ? el.value : '';
+      }
+
+      function buildSummary() {
+        var rows = [
+          ['Occasion', val('occasion')],
+          ['Guests', val('size')],
+          ['Flavor', val('flavor')],
+          ['Filling', val('filling')],
+          ['Style', val('style')],
+          ['Date', (document.getElementById('event_date').value || 'To be decided')]
+        ];
+        var html = '';
+        rows.forEach(function (r) {
+          html += '<div class="summary-row"><span>' + r[0] + '</span><span>' + (r[1] || '—') + '</span></div>';
+        });
+        document.getElementById('summaryRows').innerHTML = html;
+      }
+
+      function show(i) {
+        steps.forEach(function (s, idx) { s.classList.toggle('active', idx === i); });
+        current = i;
+        fill.style.width = Math.round(((i + 1) / total) * 100) + '%';
+        stepLabel.textContent = 'Step ' + (i + 1) + ' of ' + total;
+        stepName.textContent = steps[i].getAttribute('data-name');
+        backBtn.style.visibility = i === 0 ? 'hidden' : 'visible';
+        var last = i === total - 1;
+        nextBtn.style.display = last ? 'none' : 'inline-block';
+        submitBtn.style.display = last ? 'inline-block' : 'none';
+        if (last) buildSummary();
+        err.textContent = '';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function validateCurrent() {
+        var req = steps[current].getAttribute('data-require');
+        if (req && !val(req)) {
+          err.textContent = 'Please pick an option to continue.';
+          return false;
+        }
+        return true;
+      }
+
+      nextBtn.addEventListener('click', function () {
+        if (!validateCurrent()) return;
+        if (current < total - 1) show(current + 1);
+      });
+      backBtn.addEventListener('click', function () {
+        if (current > 0) show(current - 1);
+      });
+
+      // advance automatically a beat after choosing on radio steps
+      document.querySelectorAll('.step[data-require] input[type=radio]').forEach(function (radio) {
+        radio.addEventListener('change', function () {
+          err.textContent = '';
+          setTimeout(function () { if (current < total - 1) show(current + 1); }, 250);
+        });
+      });
+
+      show(0);
+    })();
+  </script>
+
+</body>
+</html>
