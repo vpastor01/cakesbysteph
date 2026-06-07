@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserve a Tasting | Cakes by Steph | Leesburg VA</title>
+  <meta name="description" content="Reserve your private cake tasting with Cakes by Steph in Leesburg, VA. Every commission begins here. Steph replies within 24 hours.">
+  <link rel="canonical" href="https://www.cakesbystephva.com/order">
+  <meta property="og:title" content="Reserve a Tasting | Cakes by Steph">
+  <meta property="og:description" content="Every commission begins with a private tasting. Reserve yours and Steph replies within 24 hours.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.cakesbystephva.com/order">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">Cakes by <span>Steph</span></a>
+    <ul class="nav-links">
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#why">The Atelier</a></li>
+      <li><a href="/portfolio">Portfolio</a></li>
+      <li><a href="/blog">Journal</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+    <a href="/order" class="nav-cta">Reserve a Tasting</a>
+  </nav>
+
+  <section class="page-hero">
+    <p class="eyebrow">Begin Your Commission</p>
+    <h1>Reserve a <em>Private Tasting</em></h1>
+    <p>Every cake starts here. Share your celebration below and Steph reaches out within 24 hours to plan your tasting. The $55 tasting fee credits toward your booked commission.</p>
+  </section>
+
+  <div class="form-wrap">
+    <form name="tasting" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you">
+      <input type="hidden" name="form-name" value="tasting">
+      <p hidden><label>Skip this field: <input name="bot-field"></label></p>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-field">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="occasion">Occasion</label>
+          <select id="occasion" name="occasion" required>
+            <option value="">Select one</option>
+            <option>Wedding</option>
+            <option>Quinceañera</option>
+            <option>Birthday</option>
+            <option>Baby or Baptism</option>
+            <option>Corporate or Event</option>
+            <option>Peruvian Pastries</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="date">Event Date</label>
+          <input type="date" id="date" name="event_date">
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="guests">Approximate Guest Count</label>
+        <input type="number" id="guests" name="guest_count" min="1" placeholder="e.g. 80">
+      </div>
+
+      <div class="form-field">
+        <label for="vision">Tell Steph About Your Vision</label>
+        <textarea id="vision" name="vision" rows="5" placeholder="Colors, theme, flavors, inspiration, anything on your mind."></textarea>
+      </div>
+
+      <button type="submit" class="btn-primary">Request My Tasting</button>
+      <p class="form-note">Steph personally replies within 24 hours. Weekends book 4 to 6 weeks out, so reserve early.</p>
+    </form>
+  </div>
+
+  <footer>
+    <div class="footer-brand">
+      <h3>Cakes by Steph</h3>
+      <p>Bespoke cake atelier serving Leesburg, Ashburn, Sterling, and all of Northern Virginia. Every creation made from scratch by Stephanie.</p>
+      <br>
+      <p>📞 <a href="tel:+12404715637" style="color: var(--rose); text-decoration:none;">(240) 471-5637</a></p>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <ul>
+        <li><a href="/wedding-cakes">Wedding Cakes</a></li>
+        <li><a href="/quinceanera-cakes">Quinceañera Cakes</a></li>
+        <li><a href="/birthday-cakes">Birthday Cakes</a></li>
+        <li><a href="/peruvian-pastries">Peruvian Pastries</a></li>
+        <li><a href="/baby-baptism-cakes">Baby & Baptism</a></li>
+        <li><a href="/corporate-cakes">Corporate & Events</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/order">Reserve a Tasting</a></li>
+        <li><a href="/portfolio">Portfolio</a></li>
+        <li><a href="/about">About Steph</a></li>
+        <li><a href="/blog">Journal</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="https://www.instagram.com/_cakes_bysteph_llc" target="_blank">Instagram</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2026 Cakes by Steph LLC · Leesburg, VA · All rights reserved.</p>
+    <p>Serving Leesburg · Ashburn · Sterling · Herndon · Reston · Fairfax · Northern Virginia</p>
+  </div>
+
+</body>
+</html>
