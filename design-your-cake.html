@@ -133,8 +133,9 @@
     }
     .preview .plabel { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--rose); margin-bottom: 6px; }
     .preview h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.7rem; font-weight: 600; color: var(--dark); margin-bottom: 18px; }
-    .cake-svg { width: 200px; height: 220px; margin: 0 auto; display: block; }
-    .cake-svg rect, .cake-svg ellipse { transition: all 0.4s cubic-bezier(.2,.7,.2,1); }
+    .cake-box svg { width: 200px; height: 220px; margin: 0 auto; display: block; }
+    .cake-anim { animation: cakepop 0.45s ease; transform-origin: 50% 90%; }
+    @keyframes cakepop { from { transform: scale(0.92); opacity: 0.45; } to { transform: scale(1); opacity: 1; } }
     .tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 22px; min-height: 30px; }
     .tag { font-size: 0.8rem; padding: 5px 12px; border-radius: 20px; background: var(--blush); color: var(--dark); animation: pop 0.3s ease; }
     @keyframes pop { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: none; } }
@@ -150,7 +151,7 @@
     @media (max-width: 920px) {
       .designer-inner { grid-template-columns: 1fr; padding: 110px 22px 70px; gap: 36px; }
       .preview { position: static; order: -1; }
-      .cake-svg { width: 160px; height: 176px; }
+      .cake-box svg { width: 160px; height: 176px; }
       .options { grid-template-columns: repeat(2, 1fr); }
       .field-row { grid-template-columns: 1fr; }
     }
@@ -397,7 +398,7 @@
       <aside class="preview">
         <p class="plabel">Your Creation</p>
         <h3 id="previewTitle">A Cake in the Making</h3>
-        <svg class="cake-svg" id="cakeSvg" viewBox="0 0 200 220" aria-hidden="true"></svg>
+        <div class="cake-box" id="cakeBox" aria-hidden="true"></div>
         <div class="tags" id="tags"><span class="empty">Your choices appear here.</span></div>
       </aside>
 
@@ -456,40 +457,72 @@
       function many(name){ return [].slice.call(document.querySelectorAll('input[name="'+name+'"]:checked')).map(function(e){return e.value;}); }
 
       // ---- live cake preview ----
-      var svg = document.getElementById('cakeSvg');
-      function paletteColor(){
-        var sel = document.querySelector('input[name="palette"]:checked');
-        return sel ? sel.getAttribute('data-color') : '#e8c4b8';
+      var cakeBox = document.getElementById('cakeBox');
+      function firstChecked(name){ return document.querySelector('input[name="'+name+'"]:checked'); }
+      function baseColor(){
+        var pal = firstChecked('palette');
+        if (pal) return pal.getAttribute('data-color');
+        var fc = {'Dark Chocolate':'#6b4423','Lemon':'#ecd98a','Red Velvet':'#a83246','Vanilla Bean':'#f0e6d2','Almond':'#e9ddc2','Tres Leches':'#f2e4cf','Carrot':'#d99a5b','Funfetti':'#f6e3ee'};
+        var f = firstChecked('flavor');
+        if (f && fc[f.value]) return fc[f.value];
+        return '#e8c4b8';
       }
       function tierCount(){
         var map = {'Single tier':1,'Two tiers':2,'Three tiers':3,'Four or more':4,'Not sure':2};
         return map[radio('tiers')] || 2;
       }
       function shade(hex, amt){
-        var n=parseInt(hex.slice(1),16), r=(n>>16)+amt, g=((n>>8)&255)+amt, b=(n&255)+amt;
+        var h=hex.replace('#',''); if(h.length===3){h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];}
+        var n=parseInt(h,16), r=(n>>16)+amt, g=((n>>8)&255)+amt, b=(n&255)+amt;
         r=Math.max(0,Math.min(255,r)); g=Math.max(0,Math.min(255,g)); b=Math.max(0,Math.min(255,b));
         return '#'+(0x1000000+(r<<16)+(g<<8)+b).toString(16).slice(1);
       }
+      function topper(cx, topY, base){
+        var occ = radio('occasion'), sty = radio('style');
+        if (sty==='Floral' || occ==='Wedding'){
+          return '<circle cx="'+cx+'" cy="'+(topY-7)+'" r="4" fill="#c4806e"/>'
+               + '<circle cx="'+(cx-6)+'" cy="'+(topY-3)+'" r="4" fill="#e8c4b8"/>'
+               + '<circle cx="'+(cx+6)+'" cy="'+(topY-3)+'" r="4" fill="#e8c4b8"/>'
+               + '<circle cx="'+cx+'" cy="'+(topY+1)+'" r="4" fill="#e8c4b8"/>'
+               + '<circle cx="'+cx+'" cy="'+(topY-3)+'" r="3" fill="#c9a96e"/>';
+        }
+        if (occ==='Birthday'){
+          var s=''; for (var k=-1;k<=1;k++){ var x=cx+k*9; s+='<rect x="'+(x-1)+'" y="'+(topY-12)+'" width="2.4" height="13" fill="#c4806e"/><circle cx="'+x+'" cy="'+(topY-14)+'" r="2.4" fill="#c9a96e"/>'; } return s;
+        }
+        if (occ==='Quinceañera'){
+          return '<polygon points="'+(cx-12)+','+topY+' '+(cx-12)+','+(topY-11)+' '+(cx-6)+','+(topY-4)+' '+cx+','+(topY-14)+' '+(cx+6)+','+(topY-4)+' '+(cx+12)+','+(topY-11)+' '+(cx+12)+','+topY+'" fill="#c9a96e" stroke="#b08f50" stroke-width="0.5"/>';
+        }
+        return '<circle cx="'+cx+'" cy="'+(topY-5)+'" r="5" fill="'+shade(base,-40)+'"/><rect x="'+(cx-1.4)+'" y="'+(topY-5)+'" width="2.8" height="11" fill="'+shade(base,-40)+'"/>';
+      }
       function renderCake(){
         var n = tierCount();
-        var base = paletteColor();
-        var widths = [140,112,86,62];
+        var base = baseColor();
+        var finish = radio('finish');
+        var naked = finish==='Semi-naked';
+        var drip = finish==='Ganache drip';
+        var widths = [140,112,86,62,46];
         var th = 36, gap = 2, plateY = 196;
-        var parts = '';
+        var parts = '', topW=0, topX=0, topBottom=0;
         for (var i=0;i<n;i++){
-          var w = widths[Math.min(i, widths.length-1)] - (i>=widths.length ? (i-widths.length+1)*18 : 0);
-          if (w < 40) w = 40;
+          var w = widths[Math.min(i, widths.length-1)];
           var x = 100 - w/2;
           var y = plateY - (i+1)*(th+gap);
-          var col = shade(base, i*10);
-          parts += '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+th+'" rx="6" fill="'+col+'" stroke="#3d2b1f" stroke-opacity="0.15"/>';
-          parts += '<rect x="'+x+'" y="'+(y+th-7)+'" width="'+w+'" height="7" rx="3" fill="'+shade(base,-18)+'" opacity="0.5"/>';
+          var col = shade(base, i*8);
+          parts += '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+th+'" rx="6" fill="'+col+'" fill-opacity="'+(naked?0.55:1)+'" stroke="#3d2b1f" stroke-opacity="0.15"/>';
+          parts += '<rect x="'+x+'" y="'+(y+th-7)+'" width="'+w+'" height="7" rx="3" fill="'+shade(base,-18)+'" opacity="'+(naked?0.25:0.45)+'"/>';
+          topW=w; topX=x; topBottom=y+th;
         }
-        var topY = plateY - n*(th+gap) - 14;
-        parts += '<circle cx="100" cy="'+topY+'" r="5" fill="'+shade(base,-30)+'"/>';
-        parts += '<rect x="98.5" y="'+(topY)+'" width="3" height="14" fill="'+shade(base,-30)+'"/>';
+        if (drip){
+          for (var d=0; d<=4; d++){
+            var dx = topX + 6 + d*((topW-12)/4);
+            var hgt = 6 + ((d%2)?7:3);
+            parts += '<rect x="'+(dx-2.4)+'" y="'+topBottom+'" width="4.8" height="'+hgt+'" rx="2.4" fill="'+shade(base,-55)+'"/>';
+          }
+        }
+        var topY = plateY - n*(th+gap);
+        parts += topper(100, topY, base);
         parts += '<ellipse cx="100" cy="200" rx="92" ry="9" fill="#ffffff" stroke="#e8c4b8"/>';
-        svg.innerHTML = parts;
+        cakeBox.innerHTML = '<svg viewBox="0 0 200 220" class="cake-anim">'+parts+'</svg>';
       }
 
       // ---- tags ----
