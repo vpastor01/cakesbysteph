@@ -4,64 +4,155 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Design Your Cake | Cakes by Steph Leesburg VA</title>
-  <meta name="description" content="Not sure what you want? Use the Cakes by Steph cake designer to choose your occasion, size, flavor, filling, and style, then send it straight to Steph.">
+  <meta name="description" content="Use the Cakes by Steph cake designer to build your custom cake step by step: occasion, tiers, flavors, fillings, finish, colors, and inspiration photos, sent straight to Steph.">
   <link rel="canonical" href="https://www.cakesbystephva.com/design-your-cake">
   <meta property="og:title" content="Design Your Cake | Cakes by Steph">
-  <meta property="og:description" content="Walk through your perfect cake step by step and send your vision to Steph.">
+  <meta property="og:description" content="Build your dream cake step by step and send your full vision, including inspiration photos, to Steph.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.cakesbystephva.com/design-your-cake">
   <link rel="stylesheet" href="/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    .wizard { max-width: 760px; margin: 0 auto; padding: 50px 40px 90px; }
-    .progress-wrap { margin-bottom: 40px; }
-    .progress-meta { display: flex; justify-content: space-between; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
-    .progress-track { height: 3px; background: var(--blush); border-radius: 2px; overflow: hidden; }
-    .progress-fill { height: 100%; background: var(--rose); width: 14%; transition: width 0.35s ease; }
+    .designer { position: relative; overflow: hidden; }
+    .designer::before {
+      content: ""; position: absolute; inset: 0;
+      background:
+        radial-gradient(60% 50% at 85% 0%, rgba(201,169,110,0.18), transparent 60%),
+        radial-gradient(70% 60% at 0% 100%, rgba(196,128,110,0.14), transparent 55%);
+      pointer-events: none;
+    }
+    .designer-inner {
+      position: relative; max-width: 1180px; margin: 0 auto;
+      padding: 130px 40px 90px;
+      display: grid; grid-template-columns: 1.25fr 0.9fr; gap: 56px; align-items: start;
+    }
 
+    .d-head { margin-bottom: 30px; }
+    .d-eyebrow { font-size: 0.78rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--rose); margin-bottom: 14px; }
+    .d-head h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2.6rem, 5vw, 4rem); font-weight: 600; line-height: 1.02;
+      color: var(--dark); letter-spacing: -0.01em;
+    }
+    .d-head h1 em { color: var(--rose); font-style: italic; }
+    .d-head p { color: var(--muted); margin-top: 14px; max-width: 480px; }
+
+    /* PROGRESS */
+    .progress-wrap { margin-bottom: 34px; }
+    .progress-meta { display: flex; justify-content: space-between; font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 9px; }
+    .progress-meta .cur { color: var(--rose); }
+    .progress-track { height: 4px; background: rgba(196,128,110,0.18); border-radius: 4px; overflow: hidden; }
+    .progress-fill { height: 100%; width: 10%; border-radius: 4px; background: linear-gradient(90deg, var(--rose), var(--gold)); transition: width 0.45s cubic-bezier(.4,0,.2,1); }
+
+    /* STEPS */
     .step { display: none; }
-    .step.active { display: block; animation: fade 0.35s ease; }
-    @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .step.active { display: block; animation: rise 0.45s cubic-bezier(.2,.7,.2,1); }
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .step h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 600; color: var(--dark);
+      line-height: 1.1; margin-bottom: 8px;
+    }
+    .step .sub { color: var(--muted); margin-bottom: 26px; font-size: 1.02rem; }
 
-    .step h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--dark); font-weight: normal; margin-bottom: 8px; }
-    .step .sub { color: var(--muted); margin-bottom: 28px; }
-
-    .options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
     .options.two { grid-template-columns: repeat(2, 1fr); }
-    .option { position: relative; }
-    .option input { position: absolute; opacity: 0; pointer-events: none; }
-    .option label {
-      display: block; cursor: pointer; padding: 22px 18px; text-align: center;
-      background: white; border: 1px solid var(--blush); border-radius: 3px;
-      color: var(--dark); font-size: 1rem; transition: all 0.2s;
+    .opt { position: relative; }
+    .opt input { position: absolute; opacity: 0; pointer-events: none; }
+    .opt label {
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      min-height: 64px; padding: 16px 14px; cursor: pointer;
+      background: #fff; border: 1px solid var(--blush); border-radius: 6px;
+      color: var(--dark); font-size: 1rem; line-height: 1.3;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
     }
-    .option label:hover { border-color: var(--rose); }
-    .option input:checked + label {
-      border-color: var(--rose); background: var(--blush);
-      box-shadow: inset 0 0 0 1px var(--rose);
+    .opt label:hover { transform: translateY(-3px); border-color: var(--rose); box-shadow: 0 10px 24px -14px rgba(196,128,110,0.6); }
+    .opt input:checked + label {
+      background: var(--blush); border-color: var(--rose);
+      box-shadow: inset 0 0 0 1.5px var(--rose); font-weight: 600;
     }
 
-    .field-block { margin-top: 8px; }
-    .field-block label { display:block; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-    .field-block input, .field-block textarea {
-      width: 100%; padding: 14px 16px; border: 1px solid var(--blush); border-radius: 2px;
-      font-family: 'Georgia', serif; font-size: 1rem; background: white; color: var(--text); margin-bottom: 18px;
+    /* SWATCHES */
+    .swatches { display: flex; flex-wrap: wrap; gap: 12px; }
+    .swatch { position: relative; }
+    .swatch input { position: absolute; opacity: 0; pointer-events: none; }
+    .swatch label {
+      display: block; width: 52px; height: 52px; border-radius: 50%; cursor: pointer;
+      border: 2px solid transparent; box-shadow: 0 0 0 1px rgba(0,0,0,0.08);
+      transition: transform 0.18s ease, border-color 0.18s ease;
     }
-    .field-block input:focus, .field-block textarea:focus { outline: none; border-color: var(--rose); }
+    .swatch label:hover { transform: scale(1.08); }
+    .swatch input:checked + label { border-color: var(--dark); transform: scale(1.08); }
+    .swatch .name { display: block; text-align: center; font-size: 0.66rem; letter-spacing: 0.04em; color: var(--muted); margin-top: 5px; text-transform: uppercase; }
 
-    .summary { background: var(--cream); border: 1px solid var(--blush); border-radius: 3px; padding: 24px 28px; margin: 24px 0; }
-    .summary h3 { font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rose); font-weight: normal; margin-bottom: 16px; }
-    .summary-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--blush); font-size: 0.98rem; }
-    .summary-row:last-child { border-bottom: none; }
-    .summary-row span:first-child { color: var(--muted); }
-    .summary-row span:last-child { color: var(--dark); text-align: right; }
+    /* FIELDS */
+    .field { margin-bottom: 18px; }
+    .field label.flabel { display: block; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; }
+    .field input, .field textarea, .field select {
+      width: 100%; padding: 14px 16px; border: 1px solid var(--blush); border-radius: 4px;
+      font-family: 'Georgia', serif; font-size: 1rem; background: #fff; color: var(--text);
+    }
+    .field input:focus, .field textarea:focus, .field select:focus { outline: none; border-color: var(--rose); }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .hint { font-size: 0.85rem; color: var(--muted); margin-top: 6px; }
 
-    .step-nav { display: flex; justify-content: space-between; margin-top: 34px; gap: 12px; }
+    .upload {
+      border: 1.5px dashed var(--rose); border-radius: 8px; background: rgba(196,128,110,0.05);
+      padding: 26px; text-align: center; cursor: pointer; transition: background 0.2s;
+    }
+    .upload:hover { background: rgba(196,128,110,0.1); }
+    .upload strong { color: var(--rose); }
+    .upload input { display: none; }
+    .upload .files { margin-top: 10px; font-size: 0.9rem; color: var(--dark); }
+
+    .chiprow { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chip { position: relative; }
+    .chip input { position: absolute; opacity: 0; pointer-events: none; }
+    .chip label {
+      display: inline-block; padding: 10px 18px; border-radius: 30px; cursor: pointer;
+      border: 1px solid var(--blush); background: #fff; font-size: 0.95rem; color: var(--dark);
+      transition: all 0.18s ease;
+    }
+    .chip label:hover { border-color: var(--rose); }
+    .chip input:checked + label { background: var(--blush); border-color: var(--rose); font-weight: 600; }
+
+    /* NAV BUTTONS */
+    .err { color: var(--rose); font-size: 0.92rem; margin-top: 14px; min-height: 1.2em; }
+    .step-nav { display: flex; justify-content: space-between; margin-top: 32px; gap: 12px; }
     .nav-back { visibility: hidden; }
-    .err { color: var(--rose); font-size: 0.9rem; margin-top: 12px; min-height: 1.2em; }
 
-    @media (max-width: 768px) {
-      .wizard { padding: 40px 22px 70px; }
+    /* LIVE PREVIEW */
+    .preview {
+      position: sticky; top: 100px;
+      background: linear-gradient(180deg, #fff, var(--cream));
+      border: 1px solid var(--blush); border-radius: 14px;
+      padding: 32px 28px; text-align: center;
+      box-shadow: 0 30px 60px -40px rgba(61,43,31,0.5);
+    }
+    .preview .plabel { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--rose); margin-bottom: 6px; }
+    .preview h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.7rem; font-weight: 600; color: var(--dark); margin-bottom: 18px; }
+    .cake-svg { width: 200px; height: 220px; margin: 0 auto; display: block; }
+    .cake-svg rect, .cake-svg ellipse { transition: all 0.4s cubic-bezier(.2,.7,.2,1); }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 22px; min-height: 30px; }
+    .tag { font-size: 0.8rem; padding: 5px 12px; border-radius: 20px; background: var(--blush); color: var(--dark); animation: pop 0.3s ease; }
+    @keyframes pop { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: none; } }
+    .preview .empty { color: var(--muted); font-size: 0.9rem; font-style: italic; }
+
+    .summary-final { text-align: left; background: var(--cream); border: 1px solid var(--blush); border-radius: 8px; padding: 22px 26px; margin: 22px 0; }
+    .summary-final h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--dark); margin-bottom: 14px; }
+    .srow { display: flex; justify-content: space-between; gap: 16px; padding: 7px 0; border-bottom: 1px solid var(--blush); font-size: 0.96rem; }
+    .srow:last-child { border-bottom: none; }
+    .srow span:first-child { color: var(--muted); white-space: nowrap; }
+    .srow span:last-child { color: var(--dark); text-align: right; }
+
+    @media (max-width: 920px) {
+      .designer-inner { grid-template-columns: 1fr; padding: 110px 22px 70px; gap: 36px; }
+      .preview { position: static; order: -1; }
+      .cake-svg { width: 160px; height: 176px; }
       .options { grid-template-columns: repeat(2, 1fr); }
+      .field-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -79,135 +170,239 @@
     <a href="/order" class="nav-cta">Reserve a Tasting</a>
   </nav>
 
-  <section class="page-hero">
-    <p class="eyebrow">Guided Cake Designer</p>
-    <h1>Design Your <em>Cake</em></h1>
-    <p>Answer a few questions and Steph will receive your full vision. It takes under two minutes, and there is a "help me choose" option at every step.</p>
-  </section>
+  <section class="designer">
+    <div class="designer-inner">
 
-  <div class="wizard">
-    <div class="progress-wrap">
-      <div class="progress-meta">
-        <span id="stepLabel">Step 1 of 7</span>
-        <span id="stepName">Occasion</span>
+      <!-- LEFT: WIZARD -->
+      <div>
+        <div class="d-head">
+          <p class="d-eyebrow">The Atelier Cake Designer</p>
+          <h1>Design Your <em>Masterpiece</em></h1>
+          <p>Build your cake choice by choice and watch it take shape. Steph receives every detail, including your inspiration photos, and replies within 24 hours.</p>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress-meta">
+            <span class="cur" id="stepLabel">Step 1 of 10</span>
+            <span id="stepName">Occasion</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        </div>
+
+        <form name="cake-designer" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" action="/thank-you" id="cakeForm">
+          <input type="hidden" name="form-name" value="cake-designer">
+          <p hidden><label>Skip: <input name="bot-field"></label></p>
+
+          <!-- 1 OCCASION -->
+          <div class="step active" data-name="Occasion" data-require="occasion">
+            <h2>What are we celebrating?</h2>
+            <p class="sub">Choose the occasion closest to yours.</p>
+            <div class="options">
+              <div class="opt"><input type="radio" id="o1" name="occasion" value="Wedding"><label for="o1">Wedding</label></div>
+              <div class="opt"><input type="radio" id="o2" name="occasion" value="Quinceañera"><label for="o2">Quinceañera</label></div>
+              <div class="opt"><input type="radio" id="o3" name="occasion" value="Birthday"><label for="o3">Birthday</label></div>
+              <div class="opt"><input type="radio" id="o4" name="occasion" value="Baby or Baptism"><label for="o4">Baby or Baptism</label></div>
+              <div class="opt"><input type="radio" id="o5" name="occasion" value="Anniversary"><label for="o5">Anniversary</label></div>
+              <div class="opt"><input type="radio" id="o6" name="occasion" value="Corporate or Event"><label for="o6">Corporate</label></div>
+              <div class="opt"><input type="radio" id="o7" name="occasion" value="Peruvian Pastries"><label for="o7">Peruvian Pastries</label></div>
+              <div class="opt"><input type="radio" id="o8" name="occasion" value="Something else"><label for="o8">Something Else</label></div>
+            </div>
+          </div>
+
+          <!-- 2 GUESTS -->
+          <div class="step" data-name="Guests" data-require="size">
+            <h2>How many guests?</h2>
+            <p class="sub">A rough number is plenty. It guides the size.</p>
+            <div class="options">
+              <div class="opt"><input type="radio" id="s1" name="size" value="Up to 20"><label for="s1">Up to 20</label></div>
+              <div class="opt"><input type="radio" id="s2" name="size" value="20 to 50"><label for="s2">20 to 50</label></div>
+              <div class="opt"><input type="radio" id="s3" name="size" value="50 to 100"><label for="s3">50 to 100</label></div>
+              <div class="opt"><input type="radio" id="s4" name="size" value="100 to 200"><label for="s4">100 to 200</label></div>
+              <div class="opt"><input type="radio" id="s5" name="size" value="200 or more"><label for="s5">200+</label></div>
+              <div class="opt"><input type="radio" id="s6" name="size" value="Not sure yet"><label for="s6">Not Sure</label></div>
+            </div>
+          </div>
+
+          <!-- 3 TIERS -->
+          <div class="step" data-name="Tiers" data-require="tiers">
+            <h2>How many tiers?</h2>
+            <p class="sub">Watch your cake grow on the right as you choose.</p>
+            <div class="options">
+              <div class="opt"><input type="radio" id="t1" name="tiers" value="Single tier"><label for="t1">Single</label></div>
+              <div class="opt"><input type="radio" id="t2" name="tiers" value="Two tiers"><label for="t2">Two Tiers</label></div>
+              <div class="opt"><input type="radio" id="t3" name="tiers" value="Three tiers"><label for="t3">Three Tiers</label></div>
+              <div class="opt"><input type="radio" id="t4" name="tiers" value="Four or more"><label for="t4">Four or More</label></div>
+              <div class="opt"><input type="radio" id="t5" name="tiers" value="Not sure"><label for="t5">Not Sure</label></div>
+            </div>
+          </div>
+
+          <!-- 4 FLAVORS (multi) -->
+          <div class="step" data-name="Flavor" data-require="flavor" data-multi="1">
+            <h2>Choose your flavors.</h2>
+            <p class="sub">Pick as many as you like. Tiers can each be different.</p>
+            <div class="chiprow">
+              <div class="chip"><input type="checkbox" id="f1" name="flavor" value="Vanilla Bean"><label for="f1">Vanilla Bean</label></div>
+              <div class="chip"><input type="checkbox" id="f2" name="flavor" value="Dark Chocolate"><label for="f2">Dark Chocolate</label></div>
+              <div class="chip"><input type="checkbox" id="f3" name="flavor" value="Lemon"><label for="f3">Lemon</label></div>
+              <div class="chip"><input type="checkbox" id="f4" name="flavor" value="Red Velvet"><label for="f4">Red Velvet</label></div>
+              <div class="chip"><input type="checkbox" id="f5" name="flavor" value="Almond"><label for="f5">Almond</label></div>
+              <div class="chip"><input type="checkbox" id="f6" name="flavor" value="Tres Leches"><label for="f6">Tres Leches</label></div>
+              <div class="chip"><input type="checkbox" id="f7" name="flavor" value="Carrot"><label for="f7">Carrot</label></div>
+              <div class="chip"><input type="checkbox" id="f8" name="flavor" value="Funfetti"><label for="f8">Funfetti</label></div>
+              <div class="chip"><input type="checkbox" id="f9" name="flavor" value="Help me choose"><label for="f9">Help Me Choose</label></div>
+            </div>
+          </div>
+
+          <!-- 5 FILLINGS (multi) -->
+          <div class="step" data-name="Filling" data-multi="1">
+            <h2>And the fillings?</h2>
+            <p class="sub">Optional, but this is where cakes get memorable.</p>
+            <div class="chiprow">
+              <div class="chip"><input type="checkbox" id="i1" name="filling" value="Raspberry"><label for="i1">Raspberry</label></div>
+              <div class="chip"><input type="checkbox" id="i2" name="filling" value="Salted Caramel"><label for="i2">Salted Caramel</label></div>
+              <div class="chip"><input type="checkbox" id="i3" name="filling" value="Manjar Blanco"><label for="i3">Manjar Blanco</label></div>
+              <div class="chip"><input type="checkbox" id="i4" name="filling" value="Vanilla Buttercream"><label for="i4">Vanilla Buttercream</label></div>
+              <div class="chip"><input type="checkbox" id="i5" name="filling" value="Fresh Fruit"><label for="i5">Fresh Fruit</label></div>
+              <div class="chip"><input type="checkbox" id="i6" name="filling" value="Chocolate Ganache"><label for="i6">Chocolate Ganache</label></div>
+              <div class="chip"><input type="checkbox" id="i7" name="filling" value="Cream Cheese"><label for="i7">Cream Cheese</label></div>
+            </div>
+          </div>
+
+          <!-- 6 FINISH + COLORS -->
+          <div class="step" data-name="Finish" data-require="finish">
+            <h2>Finish and color.</h2>
+            <p class="sub">How it is iced, and the palette you have in mind.</p>
+            <div class="options two" style="margin-bottom:26px;">
+              <div class="opt"><input type="radio" id="fn1" name="finish" value="Smooth buttercream"><label for="fn1">Smooth Buttercream</label></div>
+              <div class="opt"><input type="radio" id="fn2" name="finish" value="Fondant"><label for="fn2">Fondant</label></div>
+              <div class="opt"><input type="radio" id="fn3" name="finish" value="Semi-naked"><label for="fn3">Semi-Naked</label></div>
+              <div class="opt"><input type="radio" id="fn4" name="finish" value="Ganache drip"><label for="fn4">Ganache Drip</label></div>
+              <div class="opt"><input type="radio" id="fn5" name="finish" value="Textured"><label for="fn5">Textured</label></div>
+              <div class="opt"><input type="radio" id="fn6" name="finish" value="Let Steph decide"><label for="fn6">Let Steph Decide</label></div>
+            </div>
+            <p class="flabel" style="margin-bottom:12px;">Color palette (optional)</p>
+            <div class="swatches">
+              <div class="swatch"><input type="checkbox" id="c1" name="palette" value="Ivory" data-color="#f3ece1"><label for="c1" style="background:#f3ece1;"></label><span class="name">Ivory</span></div>
+              <div class="swatch"><input type="checkbox" id="c2" name="palette" value="Blush" data-color="#e8c4b8"><label for="c2" style="background:#e8c4b8;"></label><span class="name">Blush</span></div>
+              <div class="swatch"><input type="checkbox" id="c3" name="palette" value="Sage" data-color="#bcc6ab"><label for="c3" style="background:#bcc6ab;"></label><span class="name">Sage</span></div>
+              <div class="swatch"><input type="checkbox" id="c4" name="palette" value="Dusty Blue" data-color="#a9bccb"><label for="c4" style="background:#a9bccb;"></label><span class="name">Blue</span></div>
+              <div class="swatch"><input type="checkbox" id="c5" name="palette" value="Gold" data-color="#c9a96e"><label for="c5" style="background:#c9a96e;"></label><span class="name">Gold</span></div>
+              <div class="swatch"><input type="checkbox" id="c6" name="palette" value="Burgundy" data-color="#7d3a3a"><label for="c6" style="background:#7d3a3a;"></label><span class="name">Burgundy</span></div>
+              <div class="swatch"><input type="checkbox" id="c7" name="palette" value="Charcoal" data-color="#33302c"><label for="c7" style="background:#33302c;"></label><span class="name">Charcoal</span></div>
+            </div>
+          </div>
+
+          <!-- 7 STYLE -->
+          <div class="step" data-name="Style" data-require="style">
+            <h2>What is the look?</h2>
+            <p class="sub">The overall mood. Steph refines the details with you.</p>
+            <div class="options">
+              <div class="opt"><input type="radio" id="y1" name="style" value="Floral"><label for="y1">Floral</label></div>
+              <div class="opt"><input type="radio" id="y2" name="style" value="Minimalist"><label for="y2">Minimalist</label></div>
+              <div class="opt"><input type="radio" id="y3" name="style" value="Sculptural"><label for="y3">Sculptural</label></div>
+              <div class="opt"><input type="radio" id="y4" name="style" value="Opulent"><label for="y4">Opulent</label></div>
+              <div class="opt"><input type="radio" id="y5" name="style" value="Rustic"><label for="y5">Rustic</label></div>
+              <div class="opt"><input type="radio" id="y6" name="style" value="Themed"><label for="y6">Themed</label></div>
+              <div class="opt"><input type="radio" id="y7" name="style" value="Modern"><label for="y7">Modern</label></div>
+              <div class="opt"><input type="radio" id="y8" name="style" value="Let Steph design"><label for="y8">Let Steph Design</label></div>
+            </div>
+          </div>
+
+          <!-- 8 INSPIRATION + DIETARY + NOTES -->
+          <div class="step" data-name="Inspiration">
+            <h2>Show Steph your inspiration.</h2>
+            <p class="sub">Found a cake you love online? Upload it. A picture says everything.</p>
+            <div class="field">
+              <label class="upload" for="inspo">
+                <strong>Tap to upload photos</strong><br>
+                <span class="hint">JPG or PNG. Add as many as you like.</span>
+                <input type="file" id="inspo" name="inspiration" accept="image/*" multiple>
+                <span class="files" id="fileList"></span>
+              </label>
+            </div>
+            <div class="field">
+              <p class="flabel">Dietary needs (optional)</p>
+              <div class="chiprow">
+                <div class="chip"><input type="checkbox" id="d1" name="dietary" value="None"><label for="d1">None</label></div>
+                <div class="chip"><input type="checkbox" id="d2" name="dietary" value="Gluten-free"><label for="d2">Gluten-Free</label></div>
+                <div class="chip"><input type="checkbox" id="d3" name="dietary" value="Nut-free"><label for="d3">Nut-Free</label></div>
+                <div class="chip"><input type="checkbox" id="d4" name="dietary" value="Vegan"><label for="d4">Vegan</label></div>
+                <div class="chip"><input type="checkbox" id="d5" name="dietary" value="Eggless"><label for="d5">Eggless</label></div>
+              </div>
+            </div>
+            <div class="field">
+              <label class="flabel" for="notes">Anything else?</label>
+              <textarea id="notes" name="notes" rows="3" placeholder="Colors, theme, a story behind the celebration, anything on your mind."></textarea>
+            </div>
+          </div>
+
+          <!-- 9 EVENT DETAILS -->
+          <div class="step" data-name="Event">
+            <h2>Event details.</h2>
+            <p class="sub">Weekends book 4 to 6 weeks out, so earlier is better.</p>
+            <div class="field-row">
+              <div class="field">
+                <label class="flabel" for="event_date">Event Date</label>
+                <input type="date" id="event_date" name="event_date">
+              </div>
+              <div class="field">
+                <label class="flabel" for="city">Delivery City</label>
+                <input type="text" id="city" name="delivery_city" placeholder="Leesburg, Ashburn...">
+              </div>
+            </div>
+            <div class="field">
+              <label class="flabel" for="budget">Budget Range (optional)</label>
+              <select id="budget" name="budget">
+                <option value="">Prefer not to say</option>
+                <option>Under $200</option>
+                <option>$200 to $400</option>
+                <option>$400 to $700</option>
+                <option>$700 to $1,200</option>
+                <option>$1,200+</option>
+              </select>
+              <p class="hint">Every cake is custom quoted. This just helps Steph design within your range.</p>
+            </div>
+          </div>
+
+          <!-- 10 CONTACT + SUMMARY -->
+          <div class="step" data-name="Your Details">
+            <h2>Where should Steph reach you?</h2>
+            <p class="sub">Review your design below, then send it.</p>
+            <div class="field-row">
+              <div class="field"><label class="flabel" for="name">Name</label><input type="text" id="name" name="name" required></div>
+              <div class="field"><label class="flabel" for="phone">Phone</label><input type="tel" id="phone" name="phone" required></div>
+            </div>
+            <div class="field"><label class="flabel" for="email">Email</label><input type="email" id="email" name="email" required></div>
+            <div class="field">
+              <label class="flabel" for="contact_pref">Preferred Contact</label>
+              <select id="contact_pref" name="contact_pref">
+                <option>Either is fine</option>
+                <option>Call or text</option>
+                <option>Email</option>
+              </select>
+            </div>
+            <div class="summary-final"><h3>Your Cake Vision</h3><div id="summaryRows"></div></div>
+          </div>
+
+          <div class="err" id="err"></div>
+          <div class="step-nav">
+            <button type="button" class="btn-secondary nav-back" id="backBtn">Back</button>
+            <button type="button" class="btn-primary" id="nextBtn">Continue</button>
+            <button type="submit" class="btn-primary" id="submitBtn" style="display:none;">Send My Design to Steph</button>
+          </div>
+        </form>
       </div>
-      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+      <!-- RIGHT: LIVE PREVIEW -->
+      <aside class="preview">
+        <p class="plabel">Your Creation</p>
+        <h3 id="previewTitle">A Cake in the Making</h3>
+        <svg class="cake-svg" id="cakeSvg" viewBox="0 0 200 220" aria-hidden="true"></svg>
+        <div class="tags" id="tags"><span class="empty">Your choices appear here.</span></div>
+      </aside>
+
     </div>
-
-    <form name="cake-designer" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you" id="cakeForm">
-      <input type="hidden" name="form-name" value="cake-designer">
-      <p hidden><label>Skip this field: <input name="bot-field"></label></p>
-
-      <!-- STEP 1: OCCASION -->
-      <div class="step active" data-name="Occasion" data-require="occasion">
-        <h2>What are we celebrating?</h2>
-        <p class="sub">Pick the occasion closest to yours.</p>
-        <div class="options">
-          <div class="option"><input type="radio" id="o1" name="occasion" value="Wedding"><label for="o1">Wedding</label></div>
-          <div class="option"><input type="radio" id="o2" name="occasion" value="Quinceañera"><label for="o2">Quinceañera</label></div>
-          <div class="option"><input type="radio" id="o3" name="occasion" value="Birthday"><label for="o3">Birthday</label></div>
-          <div class="option"><input type="radio" id="o4" name="occasion" value="Baby or Baptism"><label for="o4">Baby or Baptism</label></div>
-          <div class="option"><input type="radio" id="o5" name="occasion" value="Corporate or Event"><label for="o5">Corporate</label></div>
-          <div class="option"><input type="radio" id="o6" name="occasion" value="Peruvian Pastries"><label for="o6">Peruvian Pastries</label></div>
-          <div class="option"><input type="radio" id="o7" name="occasion" value="Something else"><label for="o7">Something Else</label></div>
-        </div>
-      </div>
-
-      <!-- STEP 2: SIZE -->
-      <div class="step" data-name="Size" data-require="size">
-        <h2>How many guests?</h2>
-        <p class="sub">A rough number is fine. It helps Steph plan the tiers.</p>
-        <div class="options">
-          <div class="option"><input type="radio" id="s1" name="size" value="Up to 20 (petite)"><label for="s1">Up to 20</label></div>
-          <div class="option"><input type="radio" id="s2" name="size" value="20 to 50"><label for="s2">20 to 50</label></div>
-          <div class="option"><input type="radio" id="s3" name="size" value="50 to 100"><label for="s3">50 to 100</label></div>
-          <div class="option"><input type="radio" id="s4" name="size" value="100 or more (grand)"><label for="s4">100+</label></div>
-          <div class="option"><input type="radio" id="s5" name="size" value="Not sure yet"><label for="s5">Not Sure</label></div>
-        </div>
-      </div>
-
-      <!-- STEP 3: FLAVOR -->
-      <div class="step" data-name="Flavor" data-require="flavor">
-        <h2>Choose a cake flavor.</h2>
-        <p class="sub">You can mix flavors across tiers at your tasting. Start with a favorite.</p>
-        <div class="options">
-          <div class="option"><input type="radio" id="f1" name="flavor" value="Vanilla Bean"><label for="f1">Vanilla Bean</label></div>
-          <div class="option"><input type="radio" id="f2" name="flavor" value="Dark Chocolate"><label for="f2">Dark Chocolate</label></div>
-          <div class="option"><input type="radio" id="f3" name="flavor" value="Lemon"><label for="f3">Lemon</label></div>
-          <div class="option"><input type="radio" id="f4" name="flavor" value="Red Velvet"><label for="f4">Red Velvet</label></div>
-          <div class="option"><input type="radio" id="f5" name="flavor" value="Almond"><label for="f5">Almond</label></div>
-          <div class="option"><input type="radio" id="f6" name="flavor" value="Tres Leches"><label for="f6">Tres Leches</label></div>
-          <div class="option"><input type="radio" id="f7" name="flavor" value="Help me choose"><label for="f7">Help Me Choose</label></div>
-        </div>
-      </div>
-
-      <!-- STEP 4: FILLING -->
-      <div class="step" data-name="Filling" data-require="filling">
-        <h2>Pick a filling.</h2>
-        <p class="sub">The layer between the layers. This is where cakes get memorable.</p>
-        <div class="options">
-          <div class="option"><input type="radio" id="i1" name="filling" value="Raspberry"><label for="i1">Raspberry</label></div>
-          <div class="option"><input type="radio" id="i2" name="filling" value="Salted Caramel"><label for="i2">Salted Caramel</label></div>
-          <div class="option"><input type="radio" id="i3" name="filling" value="Manjar Blanco"><label for="i3">Manjar Blanco</label></div>
-          <div class="option"><input type="radio" id="i4" name="filling" value="Vanilla Buttercream"><label for="i4">Vanilla Buttercream</label></div>
-          <div class="option"><input type="radio" id="i5" name="filling" value="Fresh Fruit"><label for="i5">Fresh Fruit</label></div>
-          <div class="option"><input type="radio" id="i6" name="filling" value="Chocolate Ganache"><label for="i6">Chocolate Ganache</label></div>
-          <div class="option"><input type="radio" id="i7" name="filling" value="Help me choose"><label for="i7">Help Me Choose</label></div>
-        </div>
-      </div>
-
-      <!-- STEP 5: STYLE -->
-      <div class="step" data-name="Style" data-require="style">
-        <h2>What is the look?</h2>
-        <p class="sub">The overall vibe. Steph will refine the details with you.</p>
-        <div class="options">
-          <div class="option"><input type="radio" id="t1" name="style" value="Floral"><label for="t1">Floral</label></div>
-          <div class="option"><input type="radio" id="t2" name="style" value="Minimalist"><label for="t2">Minimalist</label></div>
-          <div class="option"><input type="radio" id="t3" name="style" value="Sculptural"><label for="t3">Sculptural</label></div>
-          <div class="option"><input type="radio" id="t4" name="style" value="Opulent"><label for="t4">Opulent</label></div>
-          <div class="option"><input type="radio" id="t5" name="style" value="Themed"><label for="t5">Themed</label></div>
-          <div class="option"><input type="radio" id="t6" name="style" value="Let Steph design it"><label for="t6">Let Steph Design</label></div>
-        </div>
-      </div>
-
-      <!-- STEP 6: DATE -->
-      <div class="step" data-name="Date">
-        <h2>When is the event?</h2>
-        <p class="sub">Weekends book 4 to 6 weeks out, so earlier is better. Skip it if you are unsure.</p>
-        <div class="field-block">
-          <label for="event_date">Event Date</label>
-          <input type="date" id="event_date" name="event_date">
-          <label for="notes">Anything else Steph should know?</label>
-          <textarea id="notes" name="notes" rows="4" placeholder="Colors, inspiration, dietary needs, a photo you love."></textarea>
-        </div>
-      </div>
-
-      <!-- STEP 7: DETAILS + SUMMARY -->
-      <div class="step" data-name="Your Details">
-        <h2>Where should Steph reach you?</h2>
-        <p class="sub">Review your cake below, then send it. Steph replies within 24 hours.</p>
-        <div class="field-block">
-          <label for="name">Your Name</label>
-          <input type="text" id="name" name="name" required>
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required>
-          <label for="phone">Phone</label>
-          <input type="tel" id="phone" name="phone" required>
-        </div>
-        <div class="summary" id="summary">
-          <h3>Your Cake Vision</h3>
-          <div id="summaryRows"></div>
-        </div>
-      </div>
-
-      <div class="err" id="err"></div>
-      <div class="step-nav">
-        <button type="button" class="btn-secondary nav-back" id="backBtn">Back</button>
-        <button type="button" class="btn-primary" id="nextBtn">Continue</button>
-        <button type="submit" class="btn-primary" id="submitBtn" style="display:none;">Send to Steph</button>
-      </div>
-    </form>
-  </div>
+  </section>
 
   <footer>
     <div class="footer-brand">
@@ -246,7 +441,7 @@
 
   <script>
     (function () {
-      var steps = Array.prototype.slice.call(document.querySelectorAll('.step'));
+      var steps = [].slice.call(document.querySelectorAll('.step'));
       var total = steps.length;
       var current = 0;
       var fill = document.getElementById('progressFill');
@@ -257,35 +452,93 @@
       var submitBtn = document.getElementById('submitBtn');
       var err = document.getElementById('err');
 
-      function val(name) {
-        var el = document.querySelector('input[name="' + name + '"]:checked');
-        return el ? el.value : '';
+      function radio(name){ var e=document.querySelector('input[name="'+name+'"]:checked'); return e?e.value:''; }
+      function many(name){ return [].slice.call(document.querySelectorAll('input[name="'+name+'"]:checked')).map(function(e){return e.value;}); }
+
+      // ---- live cake preview ----
+      var svg = document.getElementById('cakeSvg');
+      function paletteColor(){
+        var sel = document.querySelector('input[name="palette"]:checked');
+        return sel ? sel.getAttribute('data-color') : '#e8c4b8';
+      }
+      function tierCount(){
+        var map = {'Single tier':1,'Two tiers':2,'Three tiers':3,'Four or more':4,'Not sure':2};
+        return map[radio('tiers')] || 2;
+      }
+      function shade(hex, amt){
+        var n=parseInt(hex.slice(1),16), r=(n>>16)+amt, g=((n>>8)&255)+amt, b=(n&255)+amt;
+        r=Math.max(0,Math.min(255,r)); g=Math.max(0,Math.min(255,g)); b=Math.max(0,Math.min(255,b));
+        return '#'+(0x1000000+(r<<16)+(g<<8)+b).toString(16).slice(1);
+      }
+      function renderCake(){
+        var n = tierCount();
+        var base = paletteColor();
+        var widths = [140,112,86,62];
+        var th = 36, gap = 2, plateY = 196;
+        var parts = '';
+        for (var i=0;i<n;i++){
+          var w = widths[Math.min(i, widths.length-1)] - (i>=widths.length ? (i-widths.length+1)*18 : 0);
+          if (w < 40) w = 40;
+          var x = 100 - w/2;
+          var y = plateY - (i+1)*(th+gap);
+          var col = shade(base, i*10);
+          parts += '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+th+'" rx="6" fill="'+col+'" stroke="#3d2b1f" stroke-opacity="0.15"/>';
+          parts += '<rect x="'+x+'" y="'+(y+th-7)+'" width="'+w+'" height="7" rx="3" fill="'+shade(base,-18)+'" opacity="0.5"/>';
+        }
+        var topY = plateY - n*(th+gap) - 14;
+        parts += '<circle cx="100" cy="'+topY+'" r="5" fill="'+shade(base,-30)+'"/>';
+        parts += '<rect x="98.5" y="'+(topY)+'" width="3" height="14" fill="'+shade(base,-30)+'"/>';
+        parts += '<ellipse cx="100" cy="200" rx="92" ry="9" fill="#ffffff" stroke="#e8c4b8"/>';
+        svg.innerHTML = parts;
       }
 
-      function buildSummary() {
+      // ---- tags ----
+      function renderTags(){
+        var picks = [];
+        if (radio('occasion')) picks.push(radio('occasion'));
+        if (radio('size')) picks.push(radio('size'));
+        if (radio('tiers')) picks.push(radio('tiers'));
+        many('flavor').forEach(function(v){ picks.push(v); });
+        radio('finish') && picks.push(radio('finish'));
+        many('palette').forEach(function(v){ picks.push(v); });
+        radio('style') && picks.push(radio('style'));
+        var box = document.getElementById('tags');
+        if (!picks.length){ box.innerHTML = '<span class="empty">Your choices appear here.</span>'; return; }
+        box.innerHTML = picks.map(function(p){ return '<span class="tag">'+p+'</span>'; }).join('');
+        var t = document.getElementById('previewTitle');
+        t.textContent = radio('occasion') ? radio('occasion') + ' Cake' : 'A Cake in the Making';
+      }
+
+      function refresh(){ renderCake(); renderTags(); }
+
+      function buildSummary(){
         var rows = [
-          ['Occasion', val('occasion')],
-          ['Guests', val('size')],
-          ['Flavor', val('flavor')],
-          ['Filling', val('filling')],
-          ['Style', val('style')],
-          ['Date', (document.getElementById('event_date').value || 'To be decided')]
+          ['Occasion', radio('occasion')],
+          ['Guests', radio('size')],
+          ['Tiers', radio('tiers')],
+          ['Flavors', many('flavor').join(', ')],
+          ['Fillings', many('filling').join(', ')],
+          ['Finish', radio('finish')],
+          ['Palette', many('palette').join(', ')],
+          ['Style', radio('style')],
+          ['Dietary', many('dietary').join(', ')],
+          ['Date', document.getElementById('event_date').value],
+          ['Delivery', document.getElementById('city').value],
+          ['Budget', document.getElementById('budget').value]
         ];
         var html = '';
-        rows.forEach(function (r) {
-          html += '<div class="summary-row"><span>' + r[0] + '</span><span>' + (r[1] || '—') + '</span></div>';
-        });
-        document.getElementById('summaryRows').innerHTML = html;
+        rows.forEach(function(r){ if (r[1]) html += '<div class="srow"><span>'+r[0]+'</span><span>'+r[1]+'</span></div>'; });
+        document.getElementById('summaryRows').innerHTML = html || '<p class="hint">Make a few choices and they will appear here.</p>';
       }
 
-      function show(i) {
-        steps.forEach(function (s, idx) { s.classList.toggle('active', idx === i); });
+      function show(i){
+        steps.forEach(function(s,idx){ s.classList.toggle('active', idx===i); });
         current = i;
-        fill.style.width = Math.round(((i + 1) / total) * 100) + '%';
-        stepLabel.textContent = 'Step ' + (i + 1) + ' of ' + total;
+        fill.style.width = Math.round(((i+1)/total)*100)+'%';
+        stepLabel.textContent = 'Step '+(i+1)+' of '+total;
         stepName.textContent = steps[i].getAttribute('data-name');
-        backBtn.style.visibility = i === 0 ? 'hidden' : 'visible';
-        var last = i === total - 1;
+        backBtn.style.visibility = i===0 ? 'hidden' : 'visible';
+        var last = i===total-1;
         nextBtn.style.display = last ? 'none' : 'inline-block';
         submitBtn.style.display = last ? 'inline-block' : 'none';
         if (last) buildSummary();
@@ -293,31 +546,34 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
-      function validateCurrent() {
+      function validate(){
         var req = steps[current].getAttribute('data-require');
-        if (req && !val(req)) {
-          err.textContent = 'Please pick an option to continue.';
-          return false;
-        }
+        if (!req) return true;
+        var ok = steps[current].getAttribute('data-multi') ? many(req).length>0 : !!radio(req);
+        if (!ok){ err.textContent = 'Please make a selection to continue.'; return false; }
         return true;
       }
 
-      nextBtn.addEventListener('click', function () {
-        if (!validateCurrent()) return;
-        if (current < total - 1) show(current + 1);
+      nextBtn.addEventListener('click', function(){ if (validate() && current<total-1) show(current+1); });
+      backBtn.addEventListener('click', function(){ if (current>0) show(current-1); });
+
+      // auto-advance only on single-select steps
+      document.querySelectorAll('.step[data-require]:not([data-multi]) input[type=radio]').forEach(function(r){
+        r.addEventListener('change', function(){ err.textContent=''; refresh(); setTimeout(function(){ if(current<total-1) show(current+1); }, 280); });
       });
-      backBtn.addEventListener('click', function () {
-        if (current > 0) show(current - 1);
+      // live refresh on any choice
+      document.querySelectorAll('input[type=radio], input[type=checkbox]').forEach(function(el){
+        el.addEventListener('change', refresh);
       });
 
-      // advance automatically a beat after choosing on radio steps
-      document.querySelectorAll('.step[data-require] input[type=radio]').forEach(function (radio) {
-        radio.addEventListener('change', function () {
-          err.textContent = '';
-          setTimeout(function () { if (current < total - 1) show(current + 1); }, 250);
-        });
+      // file name display
+      var fileInput = document.getElementById('inspo');
+      if (fileInput) fileInput.addEventListener('change', function(){
+        var names = [].slice.call(this.files).map(function(f){return f.name;});
+        document.getElementById('fileList').textContent = names.length ? names.join(', ') : '';
       });
 
+      refresh();
       show(0);
     })();
   </script>
