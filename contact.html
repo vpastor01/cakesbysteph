@@ -134,7 +134,7 @@
     <div class="ct-card reveal dl1">
       <h2>Send a message</h2>
       <p class="lead">Required fields are marked. The more you share, the more useful Steph's first reply will be.</p>
-      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you">
+      <form name="contact" method="POST" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you">
         <input type="hidden" name="form-name" value="contact">
         <p hidden><label>Skip this field: <input name="bot-field"></label></p>
         <div class="ct-row">
@@ -173,6 +173,10 @@
         <div class="ct-field">
           <label for="message">Your Message *</label>
           <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <div class="ct-field">
+          <label for="inspiration">Inspiration Photo (optional)</label>
+          <input type="file" id="inspiration" name="inspiration" accept="image/*">
         </div>
         <button type="submit" class="btn-primary">Send Message</button>
         <p class="ct-note">Prefer to talk? Call or text (240) 471-5637. Spanish available.</p>

@@ -39,7 +39,7 @@
   </section>
 
   <div class="form-wrap">
-    <form name="tasting" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you">
+    <form name="tasting" method="POST" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you">
       <input type="hidden" name="form-name" value="tasting">
       <p hidden><label>Skip this field: <input name="bot-field"></label></p>
 
@@ -87,6 +87,11 @@
       <div class="form-field">
         <label for="vision">Tell Steph About Your Vision</label>
         <textarea id="vision" name="vision" rows="5" placeholder="Colors, theme, flavors, inspiration, anything on your mind."></textarea>
+      </div>
+
+      <div class="form-field">
+        <label for="inspiration">Inspiration Photo (optional)</label>
+        <input type="file" id="inspiration" name="inspiration" accept="image/*">
       </div>
 
       <button type="submit" class="btn-primary">Request My Tasting</button>
