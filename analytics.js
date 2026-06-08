@@ -5,7 +5,7 @@
      2) ADS_ID  - optional Google Ads tag ID              (looks like  AW-XXXXXXXXXX)
    Until a real GA4_ID is in place, tracking stays off and nothing breaks.
    ------------------------------------------------------------------ */
-var GA4_ID = "G-XXXXXXXXXX";
+var GA4_ID = "G-6725JMNSF3";
 var ADS_ID = "";
 
 (function () {
