@@ -322,16 +322,6 @@
               </label>
             </div>
             <div class="field">
-              <p class="flabel">Dietary needs (optional)</p>
-              <div class="chiprow">
-                <div class="chip"><input type="checkbox" id="d1" name="dietary" value="None"><label for="d1">None</label></div>
-                <div class="chip"><input type="checkbox" id="d2" name="dietary" value="Gluten-free"><label for="d2">Gluten-Free</label></div>
-                <div class="chip"><input type="checkbox" id="d3" name="dietary" value="Nut-free"><label for="d3">Nut-Free</label></div>
-                <div class="chip"><input type="checkbox" id="d4" name="dietary" value="Vegan"><label for="d4">Vegan</label></div>
-                <div class="chip"><input type="checkbox" id="d5" name="dietary" value="Eggless"><label for="d5">Eggless</label></div>
-              </div>
-            </div>
-            <div class="field">
               <label class="flabel" for="notes">Anything else?</label>
               <textarea id="notes" name="notes" rows="3" placeholder="Colors, theme, a story behind the celebration, anything on your mind."></textarea>
             </div>
@@ -431,6 +421,7 @@
         <li><a href="/portfolio">Portfolio</a></li>
         <li><a href="/about">About Steph</a></li>
         <li><a href="/contact">Contact</a></li>
+        <li><a href="/areas">Areas We Serve</a></li>
         <li><a href="https://www.instagram.com/_cakes_bysteph_llc" target="_blank">Instagram</a></li>
       </ul>
     </div>
@@ -554,7 +545,6 @@
           ['Finish', radio('finish')],
           ['Palette', many('palette').join(', ')],
           ['Style', radio('style')],
-          ['Dietary', many('dietary').join(', ')],
           ['Date', document.getElementById('event_date').value],
           ['Delivery', document.getElementById('city').value],
           ['Budget', document.getElementById('budget').value]
