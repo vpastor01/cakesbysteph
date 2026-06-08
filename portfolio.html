@@ -11,6 +11,24 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cakesbystephva.com/portfolio">
   <link rel="stylesheet" href="/styles.css">
+  <style>
+    .pf-filter{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:0 0 36px;padding:0 24px;}
+    .pf-filter button{font-family:inherit;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;
+      padding:9px 20px;border-radius:40px;border:1px solid var(--rose);background:transparent;color:var(--rose);cursor:pointer;transition:.25s;}
+    .pf-filter button:hover{background:var(--blush);}
+    .pf-filter button.active{background:var(--rose);color:#fff;border-color:var(--rose);}
+    .pf-grid{column-count:3;column-gap:16px;max-width:1080px;margin:0 auto;padding:0 24px 70px;}
+    @media(max-width:900px){.pf-grid{column-count:2;}}
+    @media(max-width:560px){.pf-grid{column-count:1;}}
+    .pf-item{break-inside:avoid;margin:0 0 16px;border-radius:14px;overflow:hidden;cursor:pointer;display:block;box-shadow:0 6px 20px rgba(26,16,8,.08);}
+    .pf-item img{width:100%;display:block;transition:transform .45s ease;}
+    .pf-item:hover img{transform:scale(1.05);}
+    .pf-item.hide{display:none;}
+    .pf-lb{position:fixed;inset:0;background:rgba(26,16,8,.93);display:none;align-items:center;justify-content:center;z-index:9999;padding:20px;}
+    .pf-lb.open{display:flex;}
+    .pf-lb img{max-width:92vw;max-height:88vh;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+    .pf-lb .pf-close{position:absolute;top:16px;right:26px;color:#fff;font-size:40px;line-height:1;cursor:pointer;font-weight:300;}
+  </style>
 </head>
 <body>
 
@@ -29,20 +47,14 @@
   <section class="page-hero">
     <p class="eyebrow">Selected Work</p>
     <h1>The <em>Portfolio</em></h1>
-    <p>A look at recent commissions. For the full, always-current gallery, follow Steph on Instagram.</p>
+    <p>A look at recent commissions, each one designed from scratch. Tap any cake to see it closer.</p>
   </section>
 
-  <div class="gallery">
-    <div class="gallery-tile"><span>Weddings</span><strong>Tiered &amp; Floral</strong></div>
-    <div class="gallery-tile"><span>Quincea&ntilde;era</span><strong>Signature Specialty</strong></div>
-    <div class="gallery-tile"><span>Birthdays</span><strong>Every Milestone</strong></div>
-    <div class="gallery-tile"><span>Peruvian</span><strong>Heritage Collection</strong></div>
-    <div class="gallery-tile"><span>Baby &amp; Baptism</span><strong>Soft &amp; Delicate</strong></div>
-    <div class="gallery-tile"><span>Corporate</span><strong>Branded &amp; Logo</strong></div>
-    <div class="gallery-tile"><span>Sculptural</span><strong>Custom Builds</strong></div>
-    <div class="gallery-tile"><span>Seasonal</span><strong>Limited Designs</strong></div>
-    <div class="gallery-tile"><span>Tastings</span><strong>Where It Begins</strong></div>
+  <div class="pf-filter"><button class="active" data-f="all">All</button><button data-f="wedding">Weddings</button><button data-f="birthday">Birthdays</button><button data-f="baby">Baby & Showers</button><button data-f="celebration">Celebrations</button></div>
+  <div class="pf-grid">
+    <a class="pf-item" data-cat="wedding"><img src="/images/portfolio/wedding-1.jpg" alt="Two tier white wedding cake with peach and blush roses and gold trim by Cakes by Steph, Leesburg VA" loading="lazy"></a><a class="pf-item" data-cat="birthday"><img src="/images/portfolio/birthday-1.jpg" alt="Dragon Ball themed orange birthday cake with edible dragon balls by Cakes by Steph, Leesburg VA" loading="lazy"></a><a class="pf-item" data-cat="celebration"><img src="/images/portfolio/celebration-1.jpg" alt="Best Mom Ever Mothers Day cake with pink drape and roses by Cakes by Steph, Leesburg VA" loading="lazy"></a><a class="pf-item" data-cat="wedding"><img src="/images/portfolio/wedding-2.jpg" alt="Two tier ivory Mr and Mrs wedding cake with cream roses by Cakes by Steph, Leesburg VA" loading="lazy"></a><a class="pf-item" data-cat="birthday"><img src="/images/portfolio/birthday-2.jpg" alt="Disney princess pink birthday cake with rainbow castle by Cakes by Steph, Leesburg VA" loading="lazy"></a><a class="pf-item" data-cat="celebration"><img src="/images/portfolio/celebration-2.jpg" alt="Vintage Lambeth style holiday cake with red bows and green garland by Cakes by Steph, Leesburg VA" loading="lazy"></a><a class="pf-item" data-cat="wedding"><img src="/images/portfolio/wedding-3.jpg" alt="Three tier white wedding cake with cascading peach roses by Cakes by Steph, Leesburg VA" loading="lazy"></a><a class="pf-item" data-cat="birthday"><img src="/images/portfolio/birthday-3.jpg" alt="Vintage piped buttercream birthday princess cake with black bows by Cakes by Steph, Leesburg VA" loading="lazy"></a><a class="pf-item" data-cat="baby"><img src="/images/portfolio/baby-1.jpg" alt="Oh Baby gender reveal cake with teddy bear and balloons by Cakes by Steph, Leesburg VA" loading="lazy"></a><a class="pf-item" data-cat="wedding"><img src="/images/portfolio/wedding-4.jpg" alt="Two tier white wedding cake with pearls and ivory roses by Cakes by Steph, Leesburg VA" loading="lazy"></a><a class="pf-item" data-cat="birthday"><img src="/images/portfolio/birthday-4.jpg" alt="Modelo themed heart birthday cake with edible ice cubes by Cakes by Steph, Leesburg VA" loading="lazy"></a><a class="pf-item" data-cat="birthday"><img src="/images/portfolio/birthday-5.jpg" alt="Two tier fairy garden first birthday cake with toadstool and butterflies by Cakes by Steph, Leesburg VA" loading="lazy"></a><a class="pf-item" data-cat="birthday"><img src="/images/portfolio/birthday-6.jpg" alt="Blue and white birthday cake with gold spheres and gold leaf by Cakes by Steph, Leesburg VA" loading="lazy"></a><a class="pf-item" data-cat="birthday"><img src="/images/portfolio/birthday-7.jpg" alt="White birthday cake with purple and gold macarons and sugar flowers by Cakes by Steph, Leesburg VA" loading="lazy"></a><a class="pf-item" data-cat="birthday"><img src="/images/portfolio/birthday-8.jpg" alt="Gold and blush Feliz Cumpleanos cake with pink roses and gold leaf by Cakes by Steph, Leesburg VA" loading="lazy"></a><a class="pf-item" data-cat="birthday"><img src="/images/portfolio/birthday-9.jpg" alt="Tall pink ombre drip cake with rosettes butterflies and gold spheres by Cakes by Steph, Leesburg VA" loading="lazy"></a><a class="pf-item" data-cat="birthday"><img src="/images/portfolio/birthday-10.jpg" alt="Two tier Barbie rosette birthday cake in pink and orange by Cakes by Steph, Leesburg VA" loading="lazy"></a><a class="pf-item" data-cat="birthday"><img src="/images/portfolio/birthday-11.jpg" alt="Pink vintage heart cake with gold pearls by Cakes by Steph, Leesburg VA" loading="lazy"></a><a class="pf-item" data-cat="birthday"><img src="/images/portfolio/birthday-12.jpg" alt="Tall pink and gold drip birthday cake with butterflies and palm leaves by Cakes by Steph, Leesburg VA" loading="lazy"></a>
   </div>
+
 
   <section class="cta-section">
     <h2>See Every Creation</h2>
@@ -89,5 +101,24 @@
     <p>Serving Leesburg &middot; Ashburn &middot; Sterling &middot; Herndon &middot; Reston &middot; Fairfax &middot; Northern Virginia</p>
   </div>
 
+  <div class="pf-lb" id="pfLb"><span class="pf-close">&times;</span><img id="pfLbImg" src="" alt=""></div>
+  <script>
+    (function(){
+      var btns=document.querySelectorAll('.pf-filter button');
+      var tiles=document.querySelectorAll('.pf-item');
+      btns.forEach(function(b){b.addEventListener('click',function(){
+        btns.forEach(function(x){x.classList.remove('active');});b.classList.add('active');
+        var f=b.dataset.f;
+        tiles.forEach(function(t){t.classList.toggle('hide', f!=='all' && t.dataset.cat!==f);});
+      });});
+      var lb=document.getElementById('pfLb'), img=document.getElementById('pfLbImg');
+      tiles.forEach(function(t){t.addEventListener('click',function(){
+        var s=t.querySelector('img'); img.src=s.src; img.alt=s.alt; lb.classList.add('open');
+      });});
+      function close(){lb.classList.remove('open');}
+      lb.addEventListener('click',close);
+      document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+    })();
+  </script>
 </body>
 </html>
