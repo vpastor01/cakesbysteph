@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://cakesbystephva.com/</loc><priority>1.0</priority></url>
-  <url><loc>https://cakesbystephva.com/order</loc><priority>0.8</priority></url>
+  <url><loc>https://cakesbystephva.com/order</loc><lastmod>2026-06-08</lastmod><priority>0.8</priority></url>
   <url><loc>https://cakesbystephva.com/design-your-cake</loc><priority>0.8</priority></url>
-  <url><loc>https://cakesbystephva.com/contact</loc><priority>0.8</priority></url>
+  <url><loc>https://cakesbystephva.com/contact</loc><lastmod>2026-06-08</lastmod><priority>0.8</priority></url>
   <url><loc>https://cakesbystephva.com/about</loc><priority>0.8</priority></url>
   <url><loc>https://cakesbystephva.com/portfolio</loc><priority>0.8</priority></url>
-  <url><loc>https://cakesbystephva.com/wedding-cakes</loc><priority>0.8</priority></url>
-  <url><loc>https://cakesbystephva.com/quinceanera-cakes</loc><priority>0.8</priority></url>
-  <url><loc>https://cakesbystephva.com/birthday-cakes</loc><priority>0.8</priority></url>
-  <url><loc>https://cakesbystephva.com/peruvian-pastries</loc><priority>0.8</priority></url>
-  <url><loc>https://cakesbystephva.com/baby-baptism-cakes</loc><priority>0.8</priority></url>
+  <url><loc>https://cakesbystephva.com/wedding-cakes</loc><lastmod>2026-06-08</lastmod><priority>0.8</priority></url>
+  <url><loc>https://cakesbystephva.com/quinceanera-cakes</loc><lastmod>2026-06-08</lastmod><priority>0.8</priority></url>
+  <url><loc>https://cakesbystephva.com/birthday-cakes</loc><lastmod>2026-06-08</lastmod><priority>0.8</priority></url>
+  <url><loc>https://cakesbystephva.com/peruvian-pastries</loc><lastmod>2026-06-08</lastmod><priority>0.8</priority></url>
+  <url><loc>https://cakesbystephva.com/baby-baptism-cakes</loc><lastmod>2026-06-08</lastmod><priority>0.8</priority></url>
   <url><loc>https://cakesbystephva.com/corporate-cakes</loc><priority>0.8</priority></url>
   <url><loc>https://cakesbystephva.com/areas</loc><priority>0.8</priority></url>
   <url><loc>https://cakesbystephva.com/blog</loc><priority>0.6</priority></url>
@@ -54,5 +54,5 @@
   <url><loc>https://cakesbystephva.com/custom-cakes-berryville</loc><priority>0.7</priority></url>
   <url><loc>https://cakesbystephva.com/custom-cakes-stephens-city</loc><priority>0.7</priority></url>
   <url><loc>https://cakesbystephva.com/custom-cakes-washington-dc</loc><priority>0.7</priority></url>
-  <url><loc>https://cakesbystephva.com/commercial</loc><priority>0.8</priority></url>
+  <url><loc>https://cakesbystephva.com/commercial</loc><lastmod>2026-06-08</lastmod><priority>0.8</priority></url>
 </urlset>
