@@ -11,6 +11,9 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cakesbystephva.com/thank-you">
   <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta property="og:image" content="https://cakesbystephva.com/images/portfolio/birthday-12.jpg">
+  <script src="/analytics.js"></script>
 </head>
 <body>
 
@@ -72,5 +75,12 @@
     <p>Serving Leesburg &middot; Ashburn &middot; Sterling &middot; Herndon &middot; Reston &middot; Fairfax &middot; Northern Virginia</p>
   </div>
 
+  <script>
+    window.addEventListener("load", function () {
+      if (window.gtag) {
+        gtag("event", "generate_lead", { event_category: "lead", value: 1, currency: "USD" });
+      }
+    });
+  </script>
 </body>
 </html>
