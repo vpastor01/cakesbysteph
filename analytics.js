@@ -27,7 +27,7 @@ var ADS_ID = "";
     if (!e.target.closest) return;
     var tel = e.target.closest('a[href^="tel:"]');
     if (tel) gtag("event", "phone_click", { event_category: "engagement" });
-    var cta = e.target.closest('a[href*="/order"], a[href*="/cake-quote"], a[href*="/design-your-cake"]');
+    var cta = e.target.closest('a[href*="/order"], a[href*="/custom-order"], a[href*="/design-your-cake"]');
     if (cta) gtag("event", "cta_click", { event_category: "engagement", link_url: cta.getAttribute("href") });
   });
 })();
