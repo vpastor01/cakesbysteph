@@ -115,6 +115,11 @@
       .g2,.g3{grid-template-columns:1fr;gap:0;}
       .steps{grid-template-columns:1fr;gap:32px;text-align:center;}
     }
+    .faq-wrap{max-width:780px;margin:0 auto;}
+    .faq-item{border-top:1px solid var(--line);padding:24px 0;}
+    .faq-item:last-child{border-bottom:1px solid var(--line);}
+    .faq-item h3{font-size:1.5rem;font-weight:500;margin-bottom:8px;}
+    .faq-item p{color:var(--muted);font-size:1.12rem;}
   </style>
 </head>
 <body>
@@ -239,6 +244,17 @@
     </div>
   </section>
 
+  <section class="wrap section" style="padding-top:0;">
+    <div class="head reveal"><p class="eyebrow">Questions</p><h2>Wholesale &amp; standing orders</h2></div>
+    <div class="faq-wrap">
+      <div class="faq-item reveal"><h3>Is there a minimum order for wholesale and standing orders?</h3><p>Yes. We set a minimum per delivery based on the items and how often you order, and we confirm it in your quote before anything is scheduled.</p></div>
+      <div class="faq-item reveal"><h3>Where do you deliver?</h3><p>We deliver across Northern Virginia, including Leesburg, Ashburn, Sterling, and the wider Loudoun County area. Tell us your location and we will confirm delivery for your address.</p></div>
+      <div class="faq-item reveal"><h3>How much lead time do you need?</h3><p>Recurring orders run on a schedule we set with you up front. New wholesale accounts usually start within one to two weeks of the first consultation.</p></div>
+      <div class="faq-item reveal"><h3>Do you offer invoicing or net terms?</h3><p>Yes. Invoicing and net terms are available for established business accounts. We sort out billing during onboarding so ordering stays simple.</p></div>
+      <div class="faq-item reveal"><h3>Can we change quantities on a standing order?</h3><p>Yes. You can adjust quantities ahead of each delivery with reasonable notice, so your order tracks your actual volume.</p></div>
+    </div>
+  </section>
+
   <footer>
     Cakes by Steph &middot; Leesburg, VA &middot; <a href="tel:+12404715637">(240) 471-5637</a> &middot; <a href="/custom-order">Personal orders</a> &middot; <a href="https://www.instagram.com/_cakes_bysteph_llc" target="_blank">Instagram</a>
   </footer>
@@ -250,6 +266,15 @@
       var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
       els.forEach(function(e){io.observe(e);});
     })();
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+  {"@type":"Question","name":"Is there a minimum order for wholesale and standing orders?","acceptedAnswer":{"@type":"Answer","text":"Yes. We set a minimum per delivery based on the items and how often you order, and we confirm it in your quote before anything is scheduled."}},
+  {"@type":"Question","name":"Where do you deliver?","acceptedAnswer":{"@type":"Answer","text":"We deliver across Northern Virginia, including Leesburg, Ashburn, Sterling, and the wider Loudoun County area. Tell us your location and we will confirm delivery for your address."}},
+  {"@type":"Question","name":"How much lead time do you need?","acceptedAnswer":{"@type":"Answer","text":"Recurring orders run on a schedule we set with you up front. New wholesale accounts usually start within one to two weeks of the first consultation."}},
+  {"@type":"Question","name":"Do you offer invoicing or net terms?","acceptedAnswer":{"@type":"Answer","text":"Yes. Invoicing and net terms are available for established business accounts. We sort out billing during onboarding so ordering stays simple."}},
+  {"@type":"Question","name":"Can we change quantities on a standing order?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can adjust quantities ahead of each delivery with reasonable notice, so your order tracks your actual volume."}}
+  ]}
   </script>
 
 </body>
