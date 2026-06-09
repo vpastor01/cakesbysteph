@@ -6,7 +6,7 @@
    Until a real GA4_ID is in place, tracking stays off and nothing breaks.
    ------------------------------------------------------------------ */
 var GA4_ID = "G-6725JMNSF3";
-var ADS_ID = "";
+var ADS_ID = "AW-18223804877";
 
 (function () {
   if (!GA4_ID || GA4_ID.indexOf("XXXX") !== -1) return; // not configured yet
