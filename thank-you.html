@@ -82,6 +82,8 @@
     window.addEventListener("load", function () {
       if (window.gtag) {
         gtag("event", "generate_lead", { event_category: "lead", value: 1, currency: "USD" });
+        // Google Ads conversion (lead form submit)
+        gtag("event", "conversion_event_submit_lead_form", {});
       }
     });
   </script>
