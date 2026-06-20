@@ -257,3 +257,84 @@ nav{ padding:18px 48px; background:rgba(247,241,232,.86); border-bottom:1px soli
 .footer-brand h3{ font-family:'Cormorant Garamond',serif; font-size:1.55rem; }
 footer h4{ font-family:'Jost',sans-serif; letter-spacing:.2em; color:var(--gold); font-size:.72rem; }
 .nav-links a, footer ul a{ transition:color .25s; }
+
+
+/* ================= STAGE ONE — PREMIUM REFINEMENT (site-wide, additive) =================
+   Builds on the luxury layer above. Palette and fonts are unchanged: existing tokens only,
+   Cormorant Garamond for display + Jost for body/UI. Goal: stronger type hierarchy, more
+   generous vertical rhythm, refined buttons/links/forms, and a bespoke two-column partners
+   trade form. Vertical padding is adjusted with clamp() so mobile horizontal padding and the
+   existing media queries are left intact. */
+
+/* — Typography: body set in Jost for a comfortable, readable measure; display stays Cormorant — */
+body{ font-family:'Jost', sans-serif; font-size:17px; line-height:1.72; font-weight:400; }
+h1,h2,h3{ font-family:'Cormorant Garamond', Georgia, serif; }
+
+/* Confident display headings: larger and tighter */
+.page-hero h1{ font-size:clamp(2.9rem,5vw,4.6rem); line-height:1.04; letter-spacing:-.01em; }
+.section-title,.cta-section h2{ font-size:clamp(2.5rem,3.8vw,3.6rem); line-height:1.07; letter-spacing:-.006em; }
+.content h2,.split h2{ font-size:clamp(2rem,2.8vw,2.6rem); line-height:1.12; }
+.faq h2{ font-size:clamp(2rem,3vw,2.6rem); line-height:1.1; }
+.faq-item h3,.feature h3,.blog-card h2{ line-height:1.2; }
+
+/* Comfortable body measure + vertical rhythm */
+.page-hero p{ font-size:1.15rem; line-height:1.65; max-width:40em; }
+.content p,.content li{ font-size:1.06rem; line-height:1.75; }
+.content p{ max-width:68ch; margin-bottom:22px; }
+.content h2{ margin:48px 0 18px; }
+.split p,.faq-item p,.feature p,.blog-card p{ line-height:1.7; }
+
+/* — Spacing: more air. Vertical only, so horizontal + mobile padding stay as-is — */
+.content{ padding-top:clamp(70px,8vw,124px); padding-bottom:clamp(70px,8vw,124px); }
+.split{ padding-top:clamp(70px,8vw,120px); padding-bottom:clamp(70px,8vw,120px); gap:72px; }
+.features{ padding-top:clamp(76px,8vw,124px); padding-bottom:clamp(76px,8vw,124px); }
+.features-grid{ gap:56px; }
+.gallery{ padding-top:clamp(60px,7vw,100px); padding-bottom:clamp(60px,7vw,100px); }
+.blog-list{ padding-top:clamp(70px,8vw,112px); padding-bottom:clamp(70px,8vw,112px); }
+.faq{ padding-bottom:clamp(80px,9vw,128px); }
+.cta-section{ padding-top:clamp(84px,9vw,132px); padding-bottom:clamp(84px,9vw,132px); }
+.cta-section p{ font-size:1.18rem; line-height:1.6; }
+.page-hero{ padding-bottom:clamp(80px,8vw,104px); }
+
+/* — Buttons & links: restrained, smooth hover + clear focus — */
+.btn-primary,.btn-secondary,.nav-cta{ transition:background .3s ease,color .3s ease,transform .3s ease,box-shadow .3s ease; }
+.btn-primary:hover,.btn-secondary:hover,.nav-cta:hover{ transform:translateY(-2px); box-shadow:0 14px 30px rgba(42,26,16,.16); }
+.btn-primary:active,.btn-secondary:active,.nav-cta:active{ transform:translateY(0); box-shadow:none; }
+a{ transition:color .25s ease; }
+:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+.btn-primary:focus-visible,.btn-secondary:focus-visible,.nav-cta:focus-visible{ outline-offset:4px; }
+.content a,.faq-item p a,.split p a{ text-underline-offset:.18em; text-decoration-thickness:1px; text-decoration-color:var(--blush); }
+.content a:hover,.faq-item p a:hover,.split p a:hover{ text-decoration-color:var(--rose); }
+
+/* — Forms: premium fields with polished focus — */
+.form-field{ margin-bottom:24px; }
+.form-field label{ color:var(--dark); font-size:.72rem; letter-spacing:.16em; margin-bottom:10px; }
+.form-field input,.form-field select,.form-field textarea{
+  padding:15px 18px; background:var(--ivory); border:1px solid var(--line); border-radius:3px;
+  transition:border-color .25s ease,box-shadow .25s ease,background .25s ease; }
+.form-field input::placeholder,.form-field textarea::placeholder{ color:var(--muted); opacity:.7; }
+.form-field textarea{ min-height:140px; line-height:1.6; resize:vertical; }
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{
+  border-color:var(--rose); background:#fff; box-shadow:0 0 0 3px rgba(189,122,102,.16); }
+.form-field select{ -webkit-appearance:none; appearance:none; padding-right:42px;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'><path d='M3 5l4 4 4-4' fill='none' stroke='%23b8924f' stroke-width='1.5'/></svg>");
+  background-repeat:no-repeat; background-position:right 16px center; }
+.form-note{ font-size:.82rem; }
+
+/* — Partners trade form: bespoke two-column layout with an image beside the fields.
+     CSS-only via :has(); the ::before is the image column. Degrades to a single column
+     where :has() is unsupported, and stacks to one column on mobile. — */
+.form-wrap:has(form[name="partner-inquiry"]){
+  max-width:1080px; display:grid; grid-template-columns:.85fr 1.15fr; gap:56px; align-items:stretch; }
+.form-wrap:has(form[name="partner-inquiry"])::before{
+  content:""; border-radius:3px; min-height:520px;
+  background:url("/images/portfolio/wedding-5.jpg") center/cover no-repeat;
+  box-shadow:0 24px 56px rgba(42,26,16,.20); }
+.form-wrap:has(form[name="partner-inquiry"]) form{ align-self:center; }
+
+@media (max-width:768px){
+  .split{ gap:40px; }
+  .features-grid{ gap:40px; }
+  .form-wrap:has(form[name="partner-inquiry"]){ grid-template-columns:1fr; gap:28px; }
+  .form-wrap:has(form[name="partner-inquiry"])::before{ min-height:220px; order:-1; }
+}
