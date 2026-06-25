@@ -137,4 +137,6 @@
   <url><loc>https://cakesbystephva.com/es/thank-you</loc><priority>0.6</priority></url>
   <url><loc>https://cakesbystephva.com/es/order</loc><priority>0.7</priority></url>
   <url><loc>https://cakesbystephva.com/es/custom-order</loc><priority>0.7</priority></url>
+  <url><loc>https://cakesbystephva.com/es/about</loc><priority>0.6</priority></url>
+  <url><loc>https://cakesbystephva.com/es/areas</loc><priority>0.6</priority></url>
 </urlset>
