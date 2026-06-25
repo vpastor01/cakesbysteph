@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://cakesbystephva.com/</loc><priority>1.0</priority></url>
-  <url><loc>https://cakesbystephva.com/order</loc><lastmod>2026-06-08</lastmod><priority>0.8</priority></url>
   <url><loc>https://cakesbystephva.com/design-your-cake</loc><priority>0.8</priority></url>
   <url><loc>https://cakesbystephva.com/contact</loc><lastmod>2026-06-08</lastmod><priority>0.8</priority></url>
   <url><loc>https://cakesbystephva.com/about</loc><priority>0.8</priority></url>
@@ -135,7 +134,6 @@
   <url><loc>https://cakesbystephva.com/es/corporate-cakes</loc><priority>0.7</priority></url>
   <url><loc>https://cakesbystephva.com/es/contact</loc><priority>0.6</priority></url>
   <url><loc>https://cakesbystephva.com/es/thank-you</loc><priority>0.6</priority></url>
-  <url><loc>https://cakesbystephva.com/es/order</loc><priority>0.7</priority></url>
   <url><loc>https://cakesbystephva.com/es/custom-order</loc><priority>0.7</priority></url>
   <url><loc>https://cakesbystephva.com/es/about</loc><priority>0.6</priority></url>
   <url><loc>https://cakesbystephva.com/es/areas</loc><priority>0.6</priority></url>
