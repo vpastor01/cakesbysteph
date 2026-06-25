@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserva una Degustación | Cakes by Steph | Leesburg VA</title>
+  <meta name="description" content="Reserva tu degustación privada de pastel con Cakes by Steph en Leesburg, VA. Cada encargo comienza aquí. Stephanie responde personalmente el mismo día.">
+  <link rel="canonical" href="https://cakesbystephva.com/es/order">
+  <link rel="alternate" hreflang="en" href="https://cakesbystephva.com/order">
+  <link rel="alternate" hreflang="es" href="https://cakesbystephva.com/es/order">
+  <link rel="alternate" hreflang="x-default" href="https://cakesbystephva.com/order">
+  <meta property="og:title" content="Reserva una Degustación | Cakes by Steph">
+  <meta property="og:description" content="Cada encargo comienza con una degustación privada. Reserva la tuya y Stephanie responde personalmente el mismo día.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cakesbystephva.com/es/order">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta property="og:image" content="https://cakesbystephva.com/images/portfolio/birthday-12.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#bd7a66">
+  <script src="/analytics.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav>
+    <a href="/es/" class="nav-logo">Cakes by <span>Steph</span></a>
+    <ul class="nav-links">
+      <li><a href="/es/#services">Servicios</a></li>
+      <li><a href="/design-your-cake">Diseña tu Pastel</a></li>
+      <li><a href="/portfolio">Portafolio</a></li>
+      <li><a href="/blog">Diario</a></li>
+      <li><a href="/es/contact">Contacto</a></li>
+      <li><a href="/order">English</a></li>
+    </ul>
+    <a href="/es/order" class="nav-cta">Reserva una Degustación</a>
+  </nav>
+
+  <section class="page-hero">
+    <p class="eyebrow">Comienza tu Encargo</p>
+    <h1>Reserva una <em>Degustación Privada</em></h1>
+    <p>Cada pastel comienza aquí. Comparte tu celebración abajo y Stephanie te responde personalmente el mismo día para planear tu degustación. La cuota de degustación de $55 se acredita a tu encargo reservado.</p>
+  </section>
+
+  <div class="form-wrap">
+    <form name="tasting" method="POST" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field" action="/es/thank-you">
+      <input type="hidden" name="form-name" value="tasting">
+      <p hidden><label>Skip this field: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="name">Tu Nombre</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-field">
+          <label for="phone">Teléfono</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="email">Correo Electrónico</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="occasion">Ocasión</label>
+          <select id="occasion" name="occasion" required>
+            <option value="">Selecciona una</option>
+            <option value="Wedding">Boda</option>
+            <option value="Quinceañera">Quinceañera</option>
+            <option value="Birthday">Cumpleaños</option>
+            <option value="Baby or Baptism">Baby shower o bautizo</option>
+            <option value="Corporate or Event">Corporativo o evento</option>
+            <option value="Peruvian Pastries">Pastelería peruana</option>
+            <option value="Other">Otro</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="date">Fecha del Evento</label>
+          <input type="date" id="date" name="event_date">
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="guests">Número Aproximado de Invitados</label>
+        <input type="number" id="guests" name="guest_count" min="1" placeholder="p. ej. 80">
+      </div>
+
+      <div class="form-field">
+        <label for="vision">Cuéntale a Steph tu Visión</label>
+        <textarea id="vision" name="vision" rows="5" placeholder="Colores, tema, sabores, inspiración, lo que tengas en mente."></textarea>
+      </div>
+
+      <div class="form-field">
+        <label for="inspiration">Foto de Inspiración (opcional)</label>
+        <input type="file" id="inspiration" name="inspiration" accept="image/*">
+      </div>
+
+      <button type="submit" class="btn-primary">Solicitar mi Degustación</button>
+      <p class="form-note">Stephanie responde personalmente el mismo día. Los fines de semana se reservan con 4 a 6 semanas de anticipación, así que reserva temprano.</p>
+    </form>
+  </div>
+
+  <footer>
+    <div class="footer-brand">
+      <h3>Cakes by Steph</h3>
+      <p>Pastelería artesanal que sirve a Leesburg, Ashburn, Sterling y todo el norte de Virginia. Cada creación hecha desde cero por Stephanie.</p>
+      <br>
+      <p>&#128222; <a href="tel:+12404715637" style="color: var(--rose); text-decoration:none;">(240) 471-5637</a></p>
+    </div>
+    <div>
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="/es/wedding-cakes">Pasteles de Boda</a></li>
+        <li><a href="/es/quinceanera-cakes">Pasteles de Quinceañera</a></li>
+        <li><a href="/es/birthday-cakes">Pasteles de Cumpleaños</a></li>
+        <li><a href="/es/peruvian-pastries">Pastelería Peruana</a></li>
+        <li><a href="/es/baby-baptism-cakes">Baby Shower y Bautizo</a></li>
+        <li><a href="/es/corporate-cakes">Corporativos y Eventos</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Enlaces</h4>
+      <ul>
+        <li><a href="/es/order">Reserva una Degustación</a></li>
+        <li><a href="/portfolio">Portafolio</a></li>
+        <li><a href="/about">Sobre Steph</a></li>
+        <li><a href="/blog">Diario</a></li>
+        <li><a href="/es/contact">Contacto</a></li>
+        <li><a href="/areas">Áreas que Servimos</a></li>
+        <li><a href="/partners">Para Planificadores y Lugares</a></li>
+        <li><a href="https://www.instagram.com/_cakes_bysteph_llc" target="_blank">Instagram</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Cakes by Steph LLC &middot; Leesburg, VA &middot; Todos los derechos reservados. &middot; <a href="/privacy" style="color:var(--rose);">Privacidad</a></p>
+    <p>Sirviendo a Leesburg &middot; Ashburn &middot; Sterling &middot; Herndon &middot; Reston &middot; Fairfax &middot; norte de Virginia</p>
+  </div>
+
+</body>
+</html>
