@@ -22,6 +22,13 @@
   <script type="application/ld+json">
   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://cakesbystephva.com/"}, {"@type": "ListItem", "position": 2, "name": "Journal", "item": "https://cakesbystephva.com/blog"}]}
   </script>
+  <style>
+    .pf-filter{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:0 0 36px;padding:0 24px;}
+    .pf-filter button{font-family:inherit;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;
+      padding:9px 20px;border-radius:40px;border:1px solid var(--rose);background:transparent;color:var(--rose);cursor:pointer;transition:.25s;}
+    .pf-filter button:hover{background:var(--blush);}
+    .pf-filter button.active{background:var(--rose);color:#fff;border-color:var(--rose);}
+  </style>
 </head>
 <body>
 
@@ -41,181 +48,182 @@
   <section class="page-hero">
     <p class="eyebrow">The Journal</p>
     <h1>Notes from the <em>Atelier</em></h1>
-    <p>Thoughts on tastings, flavor, and the craft behind every commission.</p>
+    <p>Planning a cake or pastry order? These guides cover flavors, sizing, timing, and design &mdash; the same things Stephanie walks through with every client. When you are ready, <a href="/custom-order" style="color:var(--rose);">request a quote</a>.</p>
   </section>
 
-  <div class="blog-list">
-    <div class="blog-card">
+  <div class="pf-filter" id="blogFilter"><button class="active" data-f="all">All</button><button data-f="planning">Planning</button><button data-f="weddings">Weddings</button><button data-f="celebrations">Celebrations</button><button data-f="seasonal">Seasonal</button><button data-f="peruvian">Peruvian</button><button data-f="business">Business</button></div>
+  <div class="blog-list" id="blogList">
+    <div class="blog-card" data-cat="planning">
       <p class="date">June 2026</p>
       <h2><a href="/blog/cake-serving-size-guide">Cake Serving Size Guide: How Many People Does a Cake Feed?</a></h2>
       <p>Roughly how many servings each size feeds, and how we size to your exact count.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="planning">
       <p class="date">June 2026</p>
       <h2><a href="/blog/buttercream-vs-fondant">Buttercream vs Fondant: Which Is Right for Your Cake?</a></h2>
       <p>How each looks, tastes, and holds up, so you can choose with confidence.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="planning">
       <p class="date">June 2026</p>
       <h2><a href="/blog/best-cake-flavors-and-fillings">The Best Cake Flavor &amp; Filling Combinations</a></h2>
       <p>Crowd-pleasing combinations, from classic vanilla to dulce de leche.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="peruvian">
       <p class="date">June 2026</p>
       <h2><a href="/blog/what-is-tres-leches-cake">What Is Tres Leches Cake?</a></h2>
       <p>The famous three-milk cake, what it is and how to order one.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="planning">
       <p class="date">June 2026</p>
       <h2><a href="/blog/how-to-store-and-serve-your-cake">How to Store, Transport &amp; Serve Your Custom Cake</a></h2>
       <p>Keep it fresh, get it there safely, and serve it at its best.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="weddings">
       <p class="date">June 2026</p>
       <h2><a href="/blog/wedding-cake-trends-2026">Wedding Cake Trends for 2026</a></h2>
       <p>Textured buttercream, pressed florals, bold color, and timeless white, done well.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="planning">
       <p class="date">June 2026</p>
       <h2><a href="/blog/tiered-vs-sheet-cake">Tiered Cake vs Sheet Cake: How to Serve a Big Event</a></h2>
       <p>How to serve a crowd beautifully, with a display cake, a sheet cake, or both.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="planning">
       <p class="date">June 2026</p>
       <h2><a href="/blog/questions-to-ask-at-cake-tasting">Questions to Ask at Your Cake Tasting</a></h2>
       <p>What to ask, and bring, so you leave your tasting with a clear plan.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="seasonal">
       <p class="date">June 2026</p>
       <h2><a href="/blog/easter-spring-cake-ideas">Easter &amp; Spring Cake Ideas in Northern Virginia</a></h2>
       <p>Pastels, florals, and brunch desserts for Easter and the first warm weekends.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="seasonal">
       <p class="date">June 2026</p>
       <h2><a href="/blog/fathers-day-cake-ideas">Father&#x27;s Day Cake Ideas in Northern Virginia</a></h2>
       <p>Cakes built around what he loves, from hobbies to favorite flavors, plus timing.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="seasonal">
       <p class="date">June 2026</p>
       <h2><a href="/blog/fourth-of-july-summer-party-cakes">Fourth of July &amp; Summer Party Cake Ideas in Northern Virginia</a></h2>
       <p>Red-white-and-blue cakes, dessert tables, and treats that hold up in the heat.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="seasonal">
       <p class="date">June 2026</p>
       <h2><a href="/blog/halloween-dia-de-los-muertos-cakes">Halloween &amp; Día de los Muertos Cake Ideas in Northern Virginia</a></h2>
       <p>Playful or elegant, from spooky-fun party cakes to marigold-bright Día de los Muertos designs.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="seasonal">
       <p class="date">June 2026</p>
       <h2><a href="/blog/new-years-eve-cakes-desserts">New Year&#x27;s Eve Cakes &amp; Desserts in Northern Virginia</a></h2>
       <p>Gold, glamour, and dessert tables to ring in the new year.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="weddings">
       <p class="date">June 2026</p>
       <h2><a href="/blog/fall-vineyard-wedding-cakes-loudoun">Fall &amp; Vineyard Wedding Cakes in Loudoun County</a></h2>
       <p>Autumn palettes, vineyard settings, and white-glove delivery in Virginia wine country.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="celebrations">
       <p class="date">June 2026</p>
       <h2><a href="/blog/first-birthday-smash-cake-ideas">First Birthday &amp; Smash Cake Ideas in Northern Virginia</a></h2>
       <p>A pretty party cake plus a little smash cake for the star of the day.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="business">
       <p class="date">June 2026</p>
       <h2><a href="/blog/retirement-office-milestone-cakes">Retirement &amp; Office Milestone Cake Ideas in Northern Virginia</a></h2>
       <p>Cakes for retirements, work anniversaries, and team milestones, with dessert tables for the office.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="seasonal">
       <p class="date">June 2026</p>
       <h2><a href="/blog/valentines-day-cakes-desserts">Valentine&#x27;s Day Cakes &amp; Desserts in Northern Virginia</a></h2>
       <p>Heart cakes, dessert boxes, and treats for two or a crowd, plus why to order early.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="seasonal">
       <p class="date">June 2026</p>
       <h2><a href="/blog/mothers-day-cake-ideas">Mother&#x27;s Day Cake Ideas in Northern Virginia</a></h2>
       <p>Elegant florals, a &#x27;Best Mom Ever&#x27; centerpiece, and brunch desserts for the family.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="celebrations">
       <p class="date">June 2026</p>
       <h2><a href="/blog/graduation-cake-ideas">Graduation Cake Ideas in Northern Virginia</a></h2>
       <p>School colors, photo cakes, and dessert tables for the party, plus timing for grad season.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="celebrations">
       <p class="date">June 2026</p>
       <h2><a href="/blog/anniversary-cake-ideas">Anniversary Cake Ideas in Northern Virginia</a></h2>
       <p>Recreate the wedding cake, mark a milestone, or keep it intimate, ideas for any anniversary.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="seasonal">
       <p class="date">June 2026</p>
       <h2><a href="/blog/holiday-christmas-cake-ideas">Holiday &amp; Christmas Cake Ideas in Northern Virginia</a></h2>
       <p>Festive designs, party desserts, and pastries for gifting, plus why December books fast.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="seasonal">
       <p class="date">June 2026</p>
       <h2><a href="/blog/thanksgiving-dessert-cake-ideas">Thanksgiving Dessert &amp; Cake Ideas in Northern Virginia</a></h2>
       <p>Fall flavors, a dessert spread for the family table, and something a little different.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="celebrations">
       <p class="date">June 2026</p>
       <h2><a href="/blog/birthday-cake-ideas-every-age">Custom Birthday Cake Ideas for Every Age</a></h2>
       <p>Ideas by age, from cartoon-bright kids&#x27; cakes to quiet, elegant milestones, all baked from scratch.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="celebrations">
       <p class="date">June 2026</p>
       <h2><a href="/blog/sweet-16-cake-ideas">Sweet 16 Cake Ideas in Northern Virginia</a></h2>
       <p>Design directions that feel current, plus sizing and timing for the big sixteenth.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="celebrations">
       <p class="date">June 2026</p>
       <h2><a href="/blog/baby-shower-baptism-cake-ideas">Baby Shower &amp; Baptism Cake Ideas in Northern Virginia</a></h2>
       <p>Gentle designs for showers, christenings, and baptisms, plus sizing and timing.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="celebrations">
       <p class="date">June 2026</p>
       <h2><a href="/blog/gender-reveal-cake-ideas">Gender Reveal Cake Ideas (and How the Surprise Works)</a></h2>
       <p>How the hidden-color surprise works, design ideas, and how to keep it a secret, even from you.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="business">
       <p class="date">June 2026</p>
       <h2><a href="/blog/corporate-logo-cakes">Branded &amp; Logo Cakes for Corporate Events</a></h2>
       <p>Logo cakes, dessert tables, and standing orders for launches, milestones, and client events.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="planning">
       <p class="date">June 2026</p>
       <h2><a href="/blog/gluten-free-dairy-free-custom-cakes">Can You Make a Gluten-Free or Dairy-Free Custom Cake?</a></h2>
       <p>How scratch baking makes room for dietary needs, and how to plan one honestly.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="weddings">
       <p class="date">June 2026</p>
       <h2><a href="/blog/wedding-cake-cost-northern-virginia">How Much Does a Wedding Cake Cost in Northern Virginia?</a></h2>
       <p>What a custom wedding cake costs here, what drives the price, and how to get an accurate quote for your guest count and design.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="celebrations">
       <p class="date">June 2026</p>
       <h2><a href="/blog/quinceanera-cake-guide">Quinceañera Cake Guide: Sizes, Servings &amp; Design Ideas</a></h2>
       <p>Sizing for your guest count, tiers, color and theme ideas, and timing, so the centerpiece matches the night.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="peruvian">
       <p class="date">June 2026</p>
       <h2><a href="/blog/what-are-alfajores-peruvian-pastries">What Are Alfajores? A Guide to Peruvian Pastries</a></h2>
       <p>Alfajores, milhojas, pionono, empanadas, and tres leches, what each one is, and how to order by the dozen.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="planning">
       <p class="date">June 2026</p>
       <h2><a href="/blog/how-far-in-advance-order-custom-cake">How Far in Advance Should You Order a Custom Cake?</a></h2>
       <p>How early to order by occasion, from weddings and quinceañeras to birthdays, plus what to do when your date is soon.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="planning">
       <p class="date">March 2026</p>
       <h2><a href="/blog/tasting-what-to-expect">What to Expect at Your Private Tasting</a></h2>
       <p>The tasting is where your whole commission takes shape. Here is exactly how the hour unfolds, and how to get the most from it.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="weddings">
       <p class="date">February 2026</p>
       <h2><a href="/blog/choosing-wedding-cake-flavors">How to Choose Your Wedding Cake Flavors</a></h2>
       <p>Flavor is personal, and the best wedding cakes reflect the couple. A simple way to narrow the choices without overthinking it.</p>
     </div>
-    <div class="blog-card">
+    <div class="blog-card" data-cat="planning">
       <p class="date">January 2026</p>
       <h2><a href="/blog/why-scratch-baked-tastes-different">Why Scratch-Baked Cakes Taste Different</a></h2>
       <p>Real butter, farm-fresh eggs, and good chocolate are not marketing. They change the cake in ways you can taste.</p>
@@ -259,5 +267,16 @@
     <p>Serving Leesburg &middot; Ashburn &middot; Sterling &middot; Herndon &middot; Reston &middot; Fairfax &middot; Northern Virginia</p>
   </div>
 
+  <script>
+  (function(){
+    var btns=document.querySelectorAll("#blogFilter button");
+    var cards=document.querySelectorAll("#blogList .blog-card");
+    btns.forEach(function(b){b.addEventListener("click",function(){
+      btns.forEach(function(x){x.classList.remove("active");});b.classList.add("active");
+      var f=b.getAttribute("data-f");
+      cards.forEach(function(c){c.style.display=(f==="all"||c.getAttribute("data-cat")===f)?"":"none";});
+    });});
+  })();
+  </script>
 </body>
 </html>
