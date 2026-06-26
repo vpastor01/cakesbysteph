@@ -1,3 +1,23 @@
+# Image optimization via Netlify Image CDN.
+# Only requests that carry the ?opt= marker are routed through the CDN (which
+# serves AVIF/WebP, resizes, and recompresses); a plain /images/... path still
+# serves the original file. That keeps local preview working and means images
+# still show even if the transform service is unavailable. The CDN's own source
+# fetch uses the plain path (no ?opt=), so there is no redirect loop.
+[[redirects]]
+  from = "/images/*"
+  query = { opt = ":opt", w = ":w" }
+  to = "/.netlify/images?url=/images/:splat&w=:w&q=72"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/images/*"
+  query = { opt = ":opt" }
+  to = "/.netlify/images?url=/images/:splat&q=72"
+  status = 200
+  force = true
+
 # Performance: long cache for static assets (image/css/js filenames are stable)
 [[headers]]
   for = "/images/*"
