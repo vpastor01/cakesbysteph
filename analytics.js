@@ -11,20 +11,35 @@ var ADS_ID = "AW-18223804877";
 (function () {
   if (!GA4_ID || GA4_ID.indexOf("XXXX") !== -1) return; // not configured yet
 
-  var s = document.createElement("script");
-  s.async = true;
-  s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA4_ID;
-  document.head.appendChild(s);
-
+  // Define the gtag queue synchronously so early events aren't lost, but hold
+  // off on downloading the (heavy) gtag/Ads script until the browser is idle or
+  // the visitor interacts. This keeps Google's ~120KB off the critical path and
+  // cuts main-thread work during first render.
   window.dataLayer = window.dataLayer || [];
   window.gtag = function () { dataLayer.push(arguments); };
-  gtag("js", new Date());
-  gtag("config", GA4_ID);
-  if (ADS_ID && ADS_ID.indexOf("XXXX") === -1) gtag("config", ADS_ID);
 
-  // Track phone taps and clicks on the main call-to-action links
+  var loaded = false;
+  function loadGA() {
+    if (loaded) return; loaded = true;
+    var s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA4_ID;
+    document.head.appendChild(s);
+    gtag("js", new Date());
+    gtag("config", GA4_ID);
+    if (ADS_ID && ADS_ID.indexOf("XXXX") === -1) gtag("config", ADS_ID);
+  }
+  ["scroll", "pointerdown", "keydown", "touchstart"].forEach(function (ev) {
+    window.addEventListener(ev, loadGA, { once: true, passive: true });
+  });
+  if ("requestIdleCallback" in window) requestIdleCallback(loadGA, { timeout: 6000 });
+  else setTimeout(loadGA, 4000);
+
+  // Track phone taps and clicks on the main call-to-action links (queues via
+  // dataLayer; the queue flushes once gtag/Ads has loaded).
   document.addEventListener("click", function (e) {
     if (!e.target.closest) return;
+    loadGA(); // ensure analytics is live for this interaction
     var tel = e.target.closest('a[href^="tel:"], a[href^="sms:"]');
     if (tel) gtag("event", "phone_click", { event_category: "engagement" });
     var cta = e.target.closest('a[href*="/custom-order"], a[href*="/design-your-cake"]');
