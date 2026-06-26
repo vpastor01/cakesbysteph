@@ -24,8 +24,8 @@
   </script>
   <style>
     .pf-filter{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin:10px auto 46px;padding:0 24px;max-width:780px;}
-    .pf-filter button{font-family:'Jost',sans-serif;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;
-      padding:12px 24px;border-radius:40px;border:1px solid var(--line);background:transparent;color:var(--rose);cursor:pointer;transition:.25s;line-height:1;}
+    .pf-filter button{font-family:'Jost',sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;
+      padding:14px 26px;border-radius:40px;border:1px solid var(--line);background:transparent;color:var(--rose);cursor:pointer;transition:.25s;line-height:1;}
     .pf-filter button:hover{background:var(--blush);color:var(--dark);border-color:var(--blush);}
     .pf-filter button.active{background:var(--rose);color:#fff;border-color:var(--rose);box-shadow:0 4px 14px rgba(189,122,102,.3);}
   </style>
@@ -51,7 +51,15 @@
     <p>Planning a cake or pastry order? These guides cover flavors, sizing, timing, and design &mdash; the same things Stephanie walks through with every client. When you are ready, <a href="/custom-order" style="color:var(--rose);">request a quote</a>.</p>
   </section>
 
-  <div class="pf-filter" id="blogFilter"><button class="active" data-f="all">All</button><button data-f="planning">Planning</button><button data-f="weddings">Weddings</button><button data-f="celebrations">Celebrations</button><button data-f="seasonal">Seasonal</button><button data-f="peruvian">Peruvian</button><button data-f="business">Business</button></div>
+  <div class="pf-filter" id="blogFilter">
+    <button class="active" data-f="all">All</button>
+    <button data-f="planning">Planning</button>
+    <button data-f="weddings">Weddings</button>
+    <button data-f="celebrations">Celebrations</button>
+    <button data-f="seasonal">Seasonal</button>
+    <button data-f="peruvian">Peruvian</button>
+    <button data-f="business">Business</button>
+  </div>
   <div class="blog-list" id="blogList">
     <div class="blog-card" data-cat="planning">
       <p class="date">June 2026</p>
