@@ -255,5 +255,5 @@ nav{ padding:18px 48px; background:rgba(247,241,232,.86); border-bottom:1px soli
 
 .cta-section{ background:linear-gradient(180deg,var(--cream),var(--ivory)); border-top:1px solid var(--line); }
 .footer-brand h3{ font-family:'Cormorant Garamond',serif; font-size:1.55rem; }
-footer h4{ font-family:'Jost',sans-serif; letter-spacing:.2em; color:var(--gold); font-size:.72rem; }
+footer h4{ font-family:'Jost',sans-serif; letter-spacing:.2em; color:#7e6128; font-size:.72rem; }
 .nav-links a, footer ul a{ transition:color .25s; }
